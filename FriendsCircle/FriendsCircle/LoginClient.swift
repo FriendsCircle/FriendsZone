@@ -31,8 +31,7 @@ class LoginClient {
                             let users = self.ref.child("users")
                             let verifyNumber =  data["verifyNum"] as! String
                             let userDic = ["phoneNumber": phone, "verifyNumber": verifyNumber, "active": false]
-                            
-                            users.updateChildValues([phone: userDic])
+                            users.setValue([phone: userDic])
                             print("Success")
                             success()
                             

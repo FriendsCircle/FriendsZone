@@ -19,6 +19,7 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        phoneNumTxtField.text = "+841696359605"
 
         // Do any additional setup after loading the view.
     }
@@ -34,7 +35,7 @@ class LoginViewController: UIViewController {
     
     @IBAction func onFetchButton(sender: UIButton) {
         fetchContact()
-        performSegueWithIdentifier("Login2ContactsList", sender: self)
+        //performSegueWithIdentifier("Login2ContactsList", sender: self)
     }
     
     func getVerifyPhoneNumber(phone:String) {
@@ -43,7 +44,7 @@ class LoginViewController: UIViewController {
         //        let userRef = loginClient.getRefFirebaseByPhoneNumber(phone)
         loginClient.getVerifyPhoneNumber({ () -> () in
             print("I get verify in")
-            self.performSegueWithIdentifier("verifySegue", sender: nil)
+            //self.performSegueWithIdentifier("verifySegue", sender: nil)
             }, failure: { (error) in
                 print(error)
             }, phone: phone)
@@ -125,7 +126,7 @@ class LoginViewController: UIViewController {
             let nextVC = segue.destinationViewController as! ContactsListViewController
             
         }
-        if segue.identifier == "Login2Verify" {
+        if segue.identifier == "verifySegue" {
             let verifyVC = segue.destinationViewController as! VerifyViewController
             verifyVC.phoneNum = phoneNumTxtField.text!
             
