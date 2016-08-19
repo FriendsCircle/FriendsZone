@@ -28,7 +28,7 @@ class TrackingSection: NSObject {
         for user in attendUser {
             annotation = MKPointAnnotation()
             annotation.coordinate = (user.coordinate?.coordinate)!
-            annotation.title = user.name as! String
+            annotation.title = user.name ?? "no name"
             print("\(user.coordinate!.coordinate)")
             annotations.append(annotation)
             

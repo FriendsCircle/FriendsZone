@@ -19,7 +19,7 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        phoneNumTxtField.text = "+841696359605"
+        phoneNumTxtField.text = "+84937264497"
 
         // Do any additional setup after loading the view.
     }

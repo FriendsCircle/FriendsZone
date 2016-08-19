@@ -40,7 +40,7 @@ class MapViewController: UIViewController {
         
         currentTrackingSection.destination = CLLocation(latitude: 10.7564032, longitude: 106.660236)
         
-        //let annotations = currentTrackingSection.locatingAllMember()
+        let annotations = currentTrackingSection.locatingAllMember()
         //print("All member:\(annotations)")
         
         //mapView.addAnnotations(annotations)
@@ -50,7 +50,7 @@ class MapViewController: UIViewController {
        // let userAnoo = UserAnnotation(user: currentUser!)
         mapView.addAnnotation(destination)
         //mapView.addAnnotation(userAnoo)
-        //mapView.addAnnotations(annotations)
+        mapView.addAnnotations(annotations)
     }
 
     /*

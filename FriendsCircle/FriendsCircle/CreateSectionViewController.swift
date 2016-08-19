@@ -10,17 +10,53 @@ import UIKit
 
 class CreateSectionViewController: UIViewController {
 
+    @IBOutlet var dateTextField: UITextField!
+    @IBOutlet var fromTimeTextField: UITextField!
+    @IBOutlet var toTimeTextField: UITextField!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    @IBAction func onTextFieldEditting(sender: UITextField) {
+        
+        let datePickerView:UIDatePicker = UIDatePicker()
+        
+        if sender.tag == 1 {
+        
+        datePickerView.datePickerMode = UIDatePickerMode.Date
+        } else if (sender.tag == 2) || (sender.tag == 3) {
+            datePickerView.datePickerMode = UIDatePickerMode.Time
+        }
+        
+        sender.inputView = datePickerView
+        
+        datePickerView.addTarget(self, action: #selector(self.datePickerValueChanged), forControlEvents: UIControlEvents.ValueChanged)
+        
     }
     
+    func datePickerValueChanged(sender:UIDatePicker) {
+        let dateFormatter = NSDateFormatter()
+        
+        if sender.datePickerMode == .Date {
+            
+        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+        
+        dateFormatter.timeStyle = NSDateFormatterStyle.NoStyle
+       
+
+            dateTextField.text = dateFormatter.stringFromDate(sender.date)
+        } else if sender.datePickerMode == .Time {
+            
+            fromTimeTextField.text = dateFormatter.stringFromDate(sender.date)
+            
+        }
+        
+    }
 
     /*
     // MARK: - Navigation

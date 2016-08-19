@@ -17,7 +17,7 @@ class UserAnnotation: NSObject, MKAnnotation {
     
     
     var title: String? {
-        return user?.name as! String
+        return user.name
     }
     
     var key: String {

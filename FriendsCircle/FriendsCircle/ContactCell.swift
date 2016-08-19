@@ -19,7 +19,7 @@ class ContactCell: UITableViewCell {
     
     var user: User! {
         didSet{
-            firstNameLabel.text = user.name as! String ?? "no name"
+            firstNameLabel.text = user.name ?? "no name"
             
             phoneNumLabel.text = user.phoneNumber as! String
             
