@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3CFF154D1D675DF700CD540A /* SessionTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFF154C1D675DF700CD540A /* SessionTracking.swift */; };
 		54CECF385C6128D3A2D81D86 /* Pods_FriendsCircle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BB3202213F4D8D6365A5AD5 /* Pods_FriendsCircle.framework */; };
 		873C864D1D572C6A00747B0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873C864C1D572C6A00747B0B /* AppDelegate.swift */; };
 		873C86521D572C6A00747B0B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873C86501D572C6A00747B0B /* Main.storyboard */; };
@@ -30,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3CFF154C1D675DF700CD540A /* SessionTracking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionTracking.swift; sourceTree = "<group>"; };
 		78791F4D39B132AD2B5205E2 /* Pods-FriendsCircle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FriendsCircle.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FriendsCircle/Pods-FriendsCircle.debug.xcconfig"; sourceTree = "<group>"; };
 		873C86491D572C6A00747B0B /* FriendsCircle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FriendsCircle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		873C864C1D572C6A00747B0B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				B860F2471D64A753009C45A0 /* User.swift */,
+				3CFF154C1D675DF700CD540A /* SessionTracking.swift */,
 				B8D86A071D5F574F00E61E92 /* TrackingSection.swift */,
 				B8D86A0B1D5F586100E61E92 /* UserAnnotation.swift */,
 				B860F2431D64A70A009C45A0 /* LoginClient.swift */,
@@ -289,6 +292,7 @@
 				B8D86A081D5F574F00E61E92 /* TrackingSection.swift in Sources */,
 				B8B7AEAD1D63829400047FA7 /* CreateSectionViewController.swift in Sources */,
 				B82976CE1D5F07B9009E9035 /* ContactCell.swift in Sources */,
+				3CFF154D1D675DF700CD540A /* SessionTracking.swift in Sources */,
 				B8D86A0C1D5F586100E61E92 /* UserAnnotation.swift in Sources */,
 				B82976B61D5EDA1A009E9035 /* MapViewController.swift in Sources */,
 				B860F2441D64A70A009C45A0 /* LoginClient.swift in Sources */,

@@ -14,13 +14,14 @@ class CreateSectionViewController: UIViewController {
     @IBOutlet var fromTimeTextField: UITextField!
     @IBOutlet var toTimeTextField: UITextField!
     
-    
-    override func viewDidLoad() {
+    let loginClient = LoginClient()
+       override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        loginClient.getUserLongLat("+841696359605")
     }
 
+    
     
     @IBAction func onTextFieldEditting(sender: UITextField) {
         
@@ -36,6 +37,13 @@ class CreateSectionViewController: UIViewController {
         sender.inputView = datePickerView
         
         datePickerView.addTarget(self, action: #selector(self.datePickerValueChanged), forControlEvents: UIControlEvents.ValueChanged)
+        
+    }
+    @IBAction func createSession(sender: AnyObject) {
+        let sessionId = Int(arc4random_uniform(UInt32(100000)))
+        let destination = NSDictionary(dictionary: ["longtitue": "103.444", "latitude": "37.333"])
+        let sessionTracking = ["sessionId": ("\(sessionId)"), "destination" : destination, "users": ["+841696359605", "+84905860687" , "+84937264497"], "beginTime" : "", "endTime": ""]
+        loginClient.createSessionTracking("\(sessionId)", sessionTracking: sessionTracking)
         
     }
     

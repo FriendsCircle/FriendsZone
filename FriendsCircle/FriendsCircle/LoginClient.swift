@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import Firebase
+import MapKit
 
 class LoginClient {
     
@@ -31,7 +32,7 @@ class LoginClient {
                             let users = self.ref.child("users")
                             let verifyNumber =  data["verifyNum"] as! String
                             let userDic = ["phoneNumber": phone, "verifyNumber": verifyNumber, "active": false]
-                            users.setValue([phone: userDic])
+                            users.updateChildValues([phone: userDic])
                             print("Success")
                             success()
                             
@@ -71,8 +72,67 @@ class LoginClient {
         let usersRef = self.ref.child("users")
         return usersRef.child(phone)
     }
+
+    func getRefFirebaseSessionTracking(sessionId: String) -> FIRDatabaseReference {
+        let sessionRef = self.ref.child("session")
+        return sessionRef.child(sessionId)
+        
+    }
     func configureDatabase() {
         ref = FIRDatabase.database().reference()
+    }
+    
+    func getRefDatabase() -> FIRDatabaseReference {
+        return self.ref
+    }
+    
+    func createSessionTracking(sessionId: String, sessionTracking: NSDictionary) {
+        let sessionref = self.ref.child("session")
+        sessionref.updateChildValues([sessionId: sessionTracking])
+        updateSessionId(sessionId)
+    }
+    func updateSessionId(sessionId: String) {
+        let sessionRef = getRefFirebaseSessionTracking(sessionId)
+        let handle = sessionRef.observeEventType(.Value, withBlock: { snapshot in
+            if snapshot.value is NSNull {
+                print("null")
+            } else {
+                let data = snapshot.value! as! NSDictionary
+                // callback
+                self.getListPhoneNumberOfSession(data)
+            }
+            
+        }, withCancelBlock: { error in
+                print(error.description)
+        })
+        ref.removeObserverWithHandle(handle)
+    }
+    
+    // callback get list phone number of session
+    func getListPhoneNumberOfSession(data: NSDictionary){
+        let listUserPhone = data["users"] as! NSArray
+        for userPhone in listUserPhone {
+            let userRef = getRefFirebaseByPhoneNumber(userPhone as! String)
+            let session = ["sessionId": data["sessionId"] as! String]
+            userRef.updateChildValues(session)
+        }
+    }
+
+    /*
+     * This function need phone number of user, get data and update long lat, add new annotaion in behind block
+    */
+    
+    func getUserLongLat(phone: String) {
+        let userRef = getRefFirebaseByPhoneNumber(phone)
+        userRef.observeEventType(.Value, withBlock: { snapshot in
+            if snapshot.value is NSNull {
+                
+            } else {
+                let data = snapshot.value! as! NSDictionary
+                // callback
+                print(data)
+            }
+        })
     }
     
     func logout() {

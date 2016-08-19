@@ -121,6 +121,13 @@
                                     <action selector="onTextFieldEditting:" destination="yC2-3P-jdK" eventType="editingDidBegin" id="1ZV-o5-OG7"/>
                                 </connections>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Tc-MR-oHw">
+                                <rect key="frame" x="197" y="180" width="103" height="30"/>
+                                <state key="normal" title="Create Session"/>
+                                <connections>
+                                    <action selector="createSession:" destination="yC2-3P-jdK" eventType="touchUpInside" id="Ro5-OO-AYs"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -325,8 +332,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5bV-Lj-bjo">
-                                <rect key="frame" x="140" y="228" width="40" height="30"/>
-                                <state key="normal" title="Verifyy"/>
+                                <rect key="frame" x="144" y="228" width="40" height="30"/>
+                                <state key="normal" title="Verify"/>
                                 <connections>
                                     <action selector="VerifyTapped:" destination="Dua-Cz-gj4" eventType="touchUpInside" id="VTk-Gx-fIE"/>
                                 </connections>

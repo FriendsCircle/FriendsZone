@@ -18,6 +18,9 @@ class User: NSObject {
     var active: Bool?
     var dictionary: NSDictionary?
     var coordinate: CLLocation?
+    var sessionId: String?
+    var longtitude: String?
+    var latitude: String?
     
     init(dictionary: NSDictionary) {
         self.dictionary = dictionary
@@ -25,8 +28,14 @@ class User: NSObject {
         phoneNumber = dictionary["phoneNumber"] as? String
         verifyNumber = dictionary["verifyNumber"] as? String
         active = dictionary["active"] as? Bool
+        coordinate = dictionary["coordinate"] as? CLLocation
+        sessionId = dictionary["sessionId"] as? String
+        longtitude = dictionary["longtitude"] as? String
+        latitude = dictionary["aclatitudetive"] as? String
+
         super.init()
     }
+    
     init(phoneNumber: String) {
         self.phoneNumber = phoneNumber
     }
