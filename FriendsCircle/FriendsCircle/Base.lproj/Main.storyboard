@@ -326,7 +326,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5bV-Lj-bjo">
                                 <rect key="frame" x="140" y="228" width="40" height="30"/>
-                                <state key="normal" title="Verify"/>
+                                <state key="normal" title="Verifyy"/>
                                 <connections>
                                     <action selector="VerifyTapped:" destination="Dua-Cz-gj4" eventType="touchUpInside" id="VTk-Gx-fIE"/>
                                 </connections>
@@ -347,7 +347,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5r-cI-Zry" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="634" y="-436"/>
+            <point key="canvasLocation" x="617" y="-98"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Q5v-BP-xUu">
