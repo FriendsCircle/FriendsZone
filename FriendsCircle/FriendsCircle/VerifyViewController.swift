@@ -42,6 +42,8 @@ class VerifyViewController: UIViewController {
             print("Error Verify")
         }
     }
+    
+    
     /*
     // MARK: - Navigation
 
