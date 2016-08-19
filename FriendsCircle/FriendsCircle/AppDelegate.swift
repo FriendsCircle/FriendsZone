@@ -67,6 +67,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         FIRApp.configure()
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil))  
+        if User.currentUser != nil {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewControllerWithIdentifier("homeNavigationController")
+            window?.rootViewController = vc
+            print("There is a current user")
+        } else {
+            print("There is no current user")
+        }
+        NSNotificationCenter.defaultCenter().addObserverForName(User.logoutString, object: nil, queue: NSOperationQueue.mainQueue()) { (NSNotification) in
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateInitialViewController()
+            self.window?.rootViewController = vc
+        }
+
         return true
     }
 
