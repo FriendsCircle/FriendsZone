@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 
 class User: NSObject {
-    var name: NSString?
+    var name: String?
     var firstName: String?
     var lastName: String?
     var phoneNumber: NSString?
