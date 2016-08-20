@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:ContactsCell.swift">
+   </FileRef>
+   <FileRef
       location = "group:FriendsCircle.xcodeproj">
    </FileRef>
    <FileRef

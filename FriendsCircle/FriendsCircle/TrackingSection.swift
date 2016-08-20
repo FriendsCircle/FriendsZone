@@ -13,8 +13,8 @@ import CoreLocation
 class TrackingSection: NSObject {
     var attendUser = [User]()
     var attendUsedAnnotations = [UserAnnotation]()
-    var begin: NSData?
-    var end: NSData?
+    var begin: NSDate?
+    var end: NSDate?
     var destination: CLLocation?
     
     func addUser(user: User)

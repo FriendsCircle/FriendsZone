@@ -51,29 +51,11 @@ class CreateSectionViewController: UIViewController {
         let dateFormatter = NSDateFormatter()
         
         if sender.datePickerMode == .Date {
-            
         dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
-        
         dateFormatter.timeStyle = NSDateFormatterStyle.NoStyle
-       
-
             dateTextField.text = dateFormatter.stringFromDate(sender.date)
         } else if sender.datePickerMode == .Time {
-            
             fromTimeTextField.text = dateFormatter.stringFromDate(sender.date)
-            
         }
-        
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
