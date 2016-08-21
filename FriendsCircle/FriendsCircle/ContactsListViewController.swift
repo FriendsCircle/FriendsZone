@@ -142,10 +142,8 @@ class ContactsListViewController: UIViewController {
         return true
     }
 
-
-    @IBAction func onBackPressed(sender: UIBarButtonItem) {
-        print("Back is pressed")
-        
+    @IBAction func dismissView(sender: AnyObject) {
+        navigationController?.popViewControllerAnimated(true)
     }
 
 }
