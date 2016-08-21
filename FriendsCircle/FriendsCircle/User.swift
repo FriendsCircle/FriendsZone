@@ -13,7 +13,7 @@ class User: NSObject {
     var name: String?
     var firstName: String?
     var lastName: String?
-    var phoneNumber: NSString?
+    var phoneNumber: String?
     var verifyNumber: NSString?
     var active: Bool?
     var dictionary: NSDictionary?
@@ -71,22 +71,7 @@ class User: NSObject {
         }
     }
     
-    /*
-     * This function need phone number of user, get data and update long lat, add new annotaion in behind block
-     */
     
-    func getUserInfo() {
-        let user = User.currentUser
-        let userRef = loginClient.getRefFirebaseByPhoneNumber(user?.phoneNumber as! String)
-        userRef.observeEventType(.Value, withBlock: { snapshot in
-            if snapshot.value is NSNull {
-                
-            } else {
-                let data = snapshot.value! as! NSDictionary
-                User.currentUser = User(dictionary: data)
-            }
-        })
-    }
 }
 
 
