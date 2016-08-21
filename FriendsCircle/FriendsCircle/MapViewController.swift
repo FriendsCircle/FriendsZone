@@ -21,6 +21,8 @@ class MapViewController: UIViewController {
     var currentUser: User?
     var currentSection: TrackingSection?
     let loginClient = LoginClient()
+    var locationManager : CLLocationManager!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,27 +30,43 @@ class MapViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         mapView.delegate = self
-        /*
+        
         let workSaiGon = MKPointAnnotation()
         workSaiGon.coordinate = CLLocationCoordinate2DMake(10.7803616,106.6860085)
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager.distanceFilter = 200
+        locationManager.requestWhenInUseAuthorization()
+//        
+//        let vietNameWork = MKPointAnnotation()
+//        vietNameWork.coordinate = CLLocationCoordinate2DMake(10.7709945,106.686252)
+//        addAnnotationAtCoordinate(vietNameWork.coordinate)
         
-        mapView.addAnnotation(workSaiGon)
-        let initRegion = MKCoordinateRegionMakeWithDistance(workSaiGon.coordinate, self.regionRadius * 1.0 , self.regionRadius * 1.0)
-        self.mapView.setRegion(initRegion, animated: false)
+        
+        // Do any additional setup after loadi®ng the view.
+        
+        
+//        let workSaiGon = MKPointAnnotation()
+//        workSaiGon.coordinate = CLLocationCoordinate2DMake(10.7803616,106.6860085)
+//        let initRegion = MKCoordinateRegionMakeWithDistance(workSaiGon.coordinate, self.regionRadius * 1.0 , self.regionRadius * 1.0)
+//        self.mapView.setRegion(initRegion, animated: false)
         
         let user = User.currentUser
-        //loginClient.getUserInfo(user!.phoneNumber! as String)
         loginClient.getUserInfo({ (user: User) in
-            print(user)
-            self.currentTrackingSection.addUser(user)
-            
-            let annotation = MKPointAnnotation()
-//            annotation.coordinate.longitude = user.longtitude!
-//            annotation.coordinate.latitude = user.latitude!
-            
-            print(annotation.coordinate)
-            self.mapView.addAnnotation(annotation)
-           
+            let tempAnnotation: MKPointAnnotation!
+            if user.longtitude != nil && user.latitude != nil {
+                tempAnnotation = MKPointAnnotation()
+
+                tempAnnotation.coordinate = CLLocationCoordinate2DMake(user.longtitude!,user.latitude!)
+                let str = String(tempAnnotation.coordinate.longitude) +  "-" + String(tempAnnotation.coordinate.latitude)
+                print(str)
+                tempAnnotation.title = str
+                print(tempAnnotation.coordinate)
+                self.addAnnotationAtCoordinate(tempAnnotation.coordinate, name: user.name!)
+                
+                
+            }
         }, phone: user!.phoneNumber!)
 
 
@@ -65,49 +83,28 @@ class MapViewController: UIViewController {
 //        }
 //        
 //        currentTrackingSection.destination = CLLocation(latitude: 10.7564032, longitude: 106.660236)
-        
-        
-
         //print("All member:\(annotations)")
-        
         //mapView.addAnnotations(annotations)
-        
-        
        // let userAnoo = UserAnnotation(user: currentUser!)
-        
-
-        let annotations = currentTrackingSection.locatingAllMember()
-        let destination = MKPointAnnotation()
-        destination.coordinate = CLLocationCoordinate2D(latitude: 10.7564032, longitude: 106.660236)
-       
-        mapView.addAnnotation(destination)
-        mapView.addAnnotations(annotations)
-
+//        let annotations = currentTrackingSection.locatingAllMember()
+//        let destination = MKPointAnnotation()
+//        destination.coordinate = CLLocationCoordinate2D(latitude: 10.7564032, longitude: 106.660236)
+//       
+//        mapView.addAnnotation(destination)
+//        mapView.addAnnotations(annotations)
+//
         
     }
-    //MARK: Testing data
-    func testDataInit(){
-        
-        var user = User(phoneNumber: "0937264497")
-        user.firstName = "Vu"
-        user.lastName = "Nguyen"
-        user.coordinate = CLLocation(latitude: 10.7761477,longitude: 106.6640438)
-        attendedUser.append(user)
-      
-        
-        
-        user = User(phoneNumber: "01689903461")
-        user.firstName = "Gon"
-        user.lastName = "Nguyen"
-        user.coordinate = CLLocation(latitude: 10.772736, longitude: 106.658706)
-        //user.coordinate?.coordinate = CLLocationCoordinate2D(latitude: 10.772736,longitude: 106.658706)
-        attendedUser.append(user)
 
 
-        print("\(attendedUser.count)")
- */
-    }
-
+//    print("\(attendedUser.count)")
+    
+//    func addAnnotationAtCoordinate(coordinate: CLLocationCoordinate2D, name: String) {
+//        let annotation = MKPointAnnotation()
+//        annotation.coordinate = coordinate
+//        annotation.title = name
+//        mapView.addAnnotation(annotation)
+//    }
 
     @IBAction func logoutTapped(sender: AnyObject) {
         loginClient.logout()
@@ -116,7 +113,7 @@ class MapViewController: UIViewController {
 
 }
 
-extension MapViewController: MKMapViewDelegate {
+extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         let reuseID = "myAnnotationView"
@@ -129,14 +126,26 @@ extension MapViewController: MKMapViewDelegate {
             
         }
         //let coordinateString = "\(annotation.coordinate.latitude), \(annotation.coordinate.longitude)"
-        
-        
         //let imageView = annotationView?.leftCalloutAccessoryView as! UIImageView
-        
         //imageView.image = annotation!.thumnail
         
         return annotationView
     }
+    
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        if status == CLAuthorizationStatus.AuthorizedWhenInUse {
+            locationManager.startUpdatingLocation()
+        }
+    }
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            let span = MKCoordinateSpanMake(0.1, 0.1)
+            let region = MKCoordinateRegionMake(location.coordinate, span)
+            mapView.setRegion(region, animated: false)
+        }
+    }
+    
     
 }
 
