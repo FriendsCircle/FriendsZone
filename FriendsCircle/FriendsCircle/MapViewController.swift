@@ -26,8 +26,9 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        mapView.delegate = self
         
+        mapView.delegate = self
+        /*
         let workSaiGon = MKPointAnnotation()
         workSaiGon.coordinate = CLLocationCoordinate2DMake(10.7803616,106.6860085)
         
@@ -56,11 +57,7 @@ class MapViewController: UIViewController {
 
         //getUserInfor(currentUser.phoneNum)
         //currentSection = getSection(currentUser.SectionID)
-        
-        
-        
-        
-        
+
         //testDataInit()
 
 //       for user in attendedUser {
@@ -108,6 +105,7 @@ class MapViewController: UIViewController {
 
 
         print("\(attendedUser.count)")
+ */
     }
 
 
