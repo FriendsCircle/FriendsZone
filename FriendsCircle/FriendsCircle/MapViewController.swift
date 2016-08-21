@@ -38,16 +38,17 @@ class MapViewController: UIViewController {
         let user = User.currentUser
         //loginClient.getUserInfo(user!.phoneNumber! as String)
         loginClient.getUserInfo({ (user: User) in
+            print(user)
             self.currentTrackingSection.addUser(user)
             
             let annotation = MKPointAnnotation()
-            annotation.coordinate.longitude = user.longtitude!
-            annotation.coordinate.latitude = user.latitude!
+//            annotation.coordinate.longitude = user.longtitude!
+//            annotation.coordinate.latitude = user.latitude!
             
             print(annotation.coordinate)
             self.mapView.addAnnotation(annotation)
            
-        }, phone: user!.phoneNumber as! String)
+        }, phone: user!.phoneNumber!)
 
 
         //currentUser = User.currentUser

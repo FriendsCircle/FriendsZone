@@ -23,7 +23,7 @@ class LoginClient {
     }
     func getVerifyPhoneNumber(success: () -> (), failure: (String) -> (), phone: String) {
         
-        Alamofire.request(.GET, "http://localhost:3000/test", parameters: ["phone": phone]) .responseJSON { response in
+        Alamofire.request(.GET, "http://localhost:3030/test", parameters: ["phone": phone]) .responseJSON { response in
             if ((response.response) != nil) {
                 if let res: NSHTTPURLResponse = response.response! {
                     if (res.statusCode == 200) {
