@@ -38,20 +38,12 @@ class SectionViewController: UIViewController {
     }
     
     @IBAction func onSubmitPressed(sender: UIBarButtonItem) {
-        print("From \(trackingSection.begin) to \(trackingSection.end)")
-        createSession(sender)
+                
+        trackingSection.submitSection()
         dismissViewControllerAnimated(true, completion: nil)
     }
     
     
-    
-    func createSession(sender: AnyObject) {
-        let sessionId = Int(arc4random_uniform(UInt32(100000)))
-        let destination = NSDictionary(dictionary: ["longtitue": "103.444", "latitude": "37.333"])
-        let sessionTracking = ["sessionId": ("\(sessionId)"), "destination" : destination, "users": ["+841696359605", "+84905860687" , "+84937264497"], "beginTime" : "", "endTime": ""]
-        loginClient.createSessionTracking("\(sessionId)", sessionTracking: sessionTracking)
-        
-    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "Section2ContactsList" {
@@ -69,7 +61,8 @@ extension SectionViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        if section == 2 { return selectedContacts.count + 1}
+        else { return 1 }
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -108,6 +101,17 @@ extension SectionViewController: UITableViewDelegate, UITableViewDataSource {
             return addButtonCell
             } else {
                 let friendCell = tableView.dequeueReusableCellWithIdentifier("FriendCell") as! FriendCell
+                friendCell.nameLabel.text = selectedContacts[indexPath.row - 1].givenName
+                for num in selectedContacts[indexPath.row - 1].phoneNumbers {
+                    let numVal = num.value as! CNPhoneNumber
+                    if num.label == CNLabelPhoneNumberMobile {
+                        friendCell.phoneNumLabel.text = ("\(numVal.stringValue)")
+                        friendCell.userInteractionEnabled = false
+                        
+                    }
+                    
+                }
+                //friendCell.nameLabel = selectedContacts[indexPath.row -1]
                 return friendCell
             }
         }
@@ -117,6 +121,7 @@ extension SectionViewController: ContactsListViewControllerDelegate {
     func contactsListViewController(contactsListViewController: ContactsListViewController, didSelectedUsersList contacts: [CNContact]) {
         print("delegate success")
         self.selectedContacts = contacts
+        tableView.reloadData()
         print("\(self.selectedContacts)")
     }
 }

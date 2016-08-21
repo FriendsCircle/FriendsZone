@@ -38,7 +38,6 @@ class LoginViewController: UIViewController {
         let loginClient = LoginClient()
         loginClient.getVerifyPhoneNumber({ () -> () in
             print("I get verify in")
-            //self.performSegueWithIdentifier("verifySegue", sender: nil)
             }, failure: { (error) in
                 print(error)
             }, phone: phone)
