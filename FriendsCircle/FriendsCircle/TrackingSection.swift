@@ -11,15 +11,11 @@ import MapKit
 import CoreLocation
 
 class TrackingSection: NSObject {
-    
-    //Properties of Section
     var attendUser = [User]()
     var attendUsedAnnotations = [UserAnnotation]()
     var begin: NSDate?
     var end: NSDate?
     var destination: CLLocation?
-    
-    let loginClient = LoginClient()
     
     func addUser(user: User)
     {
@@ -85,28 +81,4 @@ class TrackingSection: NSObject {
         
         return timeString
     }
-    
-    //MARK: Function to communicate with database
-    
-    func submitSection() {
-        
-        let sessionId = Int(arc4random_uniform(UInt32(100000)))
-        
-        let dateFormatter = NSDateFormatter()
-        
-        dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
-        dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
-        
-        let beginString = dateFormatter.stringFromDate(begin!)
-        let endString = dateFormatter.stringFromDate(end!)
-        
-        
-        
-        let destination = NSDictionary(dictionary: ["longtitue": "103.444", "latitude": "37.333"])
-        let sessionTracking = ["sessionId": ("\(sessionId)"), "destination" : destination, "users": ["+841696359605", "+84905860687" , "+84937264497"], "beginTime" : beginString, "endTime": endString]
-
-        
-        loginClient.createSessionTracking("\(sessionId)", sessionTracking: sessionTracking)
-    }
-
 }

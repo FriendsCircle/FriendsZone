@@ -89,9 +89,10 @@ class LoginClient {
     func createSessionTracking(sessionId: String, sessionTracking: NSDictionary) {
         let sessionref = self.ref.child("session")
         sessionref.updateChildValues([sessionId: sessionTracking])
-        updateSessionId(sessionId)
+        getSession(sessionId)
     }
-    func updateSessionId(sessionId: String) {
+    
+    func getSession(sessionId: String) {
         let sessionRef = getRefFirebaseSessionTracking(sessionId)
         let handle = sessionRef.observeEventType(.Value, withBlock: { snapshot in
             if snapshot.value is NSNull {
@@ -117,24 +118,59 @@ class LoginClient {
             userRef.updateChildValues(session)
         }
     }
-
-    /*
-     * This function need phone number of user, get data and update long lat, add new annotaion in behind block
-    */
     
-    func getUserLongLat(phone: String) {
+    
+    func getUserInSession(sessionId: String) {
+        let sessionRef = getRefFirebaseSessionTracking(sessionId)
+        let handle = sessionRef.observeEventType(.Value, withBlock: { snapshot in
+            if snapshot.value is NSNull {
+                print("null")
+            } else {
+                let data = snapshot.value! as! NSDictionary
+                // callback
+                self.getUsersLongLatInSession(data)
+            }
+            
+            }, withCancelBlock: { error in
+                print(error.description)
+        })
+        ref.removeObserverWithHandle(handle)
+    }
+
+    func getUsersLongLatInSession(data: NSDictionary) {
+        let listUserPhone = data["users"] as! NSArray
+        for userPhone in listUserPhone {
+            let userRef = getRefFirebaseByPhoneNumber(userPhone as! String)
+            userRef.observeEventType(.Value, withBlock: { snapshot in
+                if snapshot.value is NSNull {
+                    print("null")
+                } else {
+                    let data = snapshot.value! as! NSDictionary
+                    // callback
+                    print("users long lat in session \(data)")
+                    
+                }
+                
+            }, withCancelBlock: { error in
+                print(error.description)
+            })
+
+        }
+    }
+    
+    func getUserInfo(phone: String) {
         let userRef = getRefFirebaseByPhoneNumber(phone)
-        userRef.observeEventType(.Value, withBlock: { snapshot in
+        userRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
             if snapshot.value is NSNull {
                 
             } else {
                 let data = snapshot.value! as! NSDictionary
-                // callback
-                print(data)
+                print("User Info")
+                self.getUserInSession(data["sessionId"] as! String)
             }
         })
     }
-    
+
     func logout() {
         User.currentUser = nil
         NSNotificationCenter.defaultCenter().postNotificationName(User.logoutString, object: nil)
