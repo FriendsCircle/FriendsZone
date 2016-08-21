@@ -21,8 +21,6 @@ class CreateSectionViewController: UIViewController {
         loginClient.getUserLongLat("+841696359605")
     }
 
-    
-    
     @IBAction func onTextFieldEditting(sender: UITextField) {
         
         let datePickerView:UIDatePicker = UIDatePicker()

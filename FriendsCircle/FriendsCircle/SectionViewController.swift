@@ -29,7 +29,9 @@ class SectionViewController: UIViewController {
     
 
     @IBAction func onBackPressed(sender: UIBarButtonItem) {
-        dismissViewControllerAnimated(true, completion: nil)
+//        dismissViewControllerAnimated(true, completion: nil)
+        navigationController?.popViewControllerAnimated(true)
+        
     }
     
     @IBAction func onSubmitPressed(sender: UIBarButtonItem) {
