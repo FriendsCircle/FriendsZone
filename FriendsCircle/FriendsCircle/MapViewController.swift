@@ -99,12 +99,12 @@ class MapViewController: UIViewController {
 
 //    print("\(attendedUser.count)")
     
-//    func addAnnotationAtCoordinate(coordinate: CLLocationCoordinate2D, name: String) {
-//        let annotation = MKPointAnnotation()
-//        annotation.coordinate = coordinate
-//        annotation.title = name
-//        mapView.addAnnotation(annotation)
-//    }
+    func addAnnotationAtCoordinate(coordinate: CLLocationCoordinate2D, name: String) {
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = coordinate
+        annotation.title = name
+        mapView.addAnnotation(annotation)
+    }
 
     @IBAction func logoutTapped(sender: AnyObject) {
         loginClient.logout()
