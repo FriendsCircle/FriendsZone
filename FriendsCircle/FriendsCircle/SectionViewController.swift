@@ -15,6 +15,7 @@ class SectionViewController: UIViewController {
     let loginClient = LoginClient()
     var trackingSection = TrackingSection()
     var selectedContacts = [CNContact]()
+    var users = [User]()
     
     @IBOutlet var tableView: UITableView!
     
@@ -120,6 +121,16 @@ extension SectionViewController: UITableViewDelegate, UITableViewDataSource {
 extension SectionViewController: ContactsListViewControllerDelegate {
     func contactsListViewController(contactsListViewController: ContactsListViewController, didSelectedUsersList contacts: [CNContact]) {
         print("delegate success")
+        for contact in contacts {
+            let phoneNum: String?
+            for num in contact.phoneNumbers {
+                let numVal = num.value as! CNPhoneNumber
+                if num.label == CNLabelPhoneNumberMobile {
+                    phoneNum = "\(numVal.stringValue)"
+                }
+            let user = User(phoneNumber: phoneNum!)
+                users.append(user)
+        }
         self.selectedContacts = contacts
         tableView.reloadData()
         print("\(self.selectedContacts)")
