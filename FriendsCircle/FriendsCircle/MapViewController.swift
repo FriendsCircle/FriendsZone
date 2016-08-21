@@ -197,6 +197,12 @@ class MapViewController: UIViewController {
         print("\(attendedUser.count)")
     }
 
+
+    @IBAction func logoutTapped(sender: AnyObject) {
+        loginClient.logout()
+    }
+
+
 }
 
 extension MapViewController: MKMapViewDelegate {
