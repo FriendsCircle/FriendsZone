@@ -49,4 +49,7 @@ class UserAnnotation: NSObject, MKAnnotation {
         self.user = user
         self.coordinate = (user.coordinate?.coordinate)!
     }
+    
+    
+    
 }

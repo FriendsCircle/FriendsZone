@@ -27,7 +27,7 @@ class SectionViewController: UIViewController {
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
         
-        loginClient.getUserLongLat("+841696359605")
+        
     }
     
 
@@ -38,14 +38,14 @@ class SectionViewController: UIViewController {
     }
     
     @IBAction func onSubmitPressed(sender: UIBarButtonItem) {
-        print("From \(trackingSection.begin) to \(trackingSection.end)")
-        createSession(sender)
-        dismissViewControllerAnimated(true, completion: nil)
+       // print("From \(trackingSection.begin) to \(trackingSection.end)")
+        createSession()
+       // dismissViewControllerAnimated(true, completion: nil)
     }
     
     
     
-    func createSession(sender: AnyObject) {
+    func createSession() {
         let sessionId = Int(arc4random_uniform(UInt32(100000)))
         let destination = NSDictionary(dictionary: ["longtitue": "103.444", "latitude": "37.333"])
         let sessionTracking = ["sessionId": ("\(sessionId)"), "destination" : destination, "users": ["+841696359605", "+84905860687" , "+84937264497"], "beginTime" : "", "endTime": ""]

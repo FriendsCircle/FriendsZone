@@ -24,13 +24,14 @@ class MapViewController: UIViewController {
     var currentUser: User?
     var currentSection: TrackingSection?
     let loginClient = LoginClient()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         mapView.delegate = self
-        currentUser = User.currentUser
-        loginClient.getUserLongLat((currentUser?.phoneNumber)! as String)
+        let user = User.currentUser
+        loginClient.getUserInfo(user?.phoneNumber as! String)
         //getUserInfor(currentUser.phoneNum)
         //currentSection = getSection(currentUser.SectionID)
         
@@ -61,6 +62,7 @@ class MapViewController: UIViewController {
         mapView.addAnnotation(destination)
         //mapView.addAnnotation(userAnoo)
         mapView.addAnnotations(annotations)
+        
     }
     
     //MARK: additional functions
