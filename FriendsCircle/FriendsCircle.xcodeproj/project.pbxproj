@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		3CFF154D1D675DF700CD540A /* SessionTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFF154C1D675DF700CD540A /* SessionTracking.swift */; };
 		54CECF385C6128D3A2D81D86 /* Pods_FriendsCircle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BB3202213F4D8D6365A5AD5 /* Pods_FriendsCircle.framework */; };
+		871E8B4B1D699A9500400479 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 871E8B4A1D699A9500400479 /* Images.xcassets */; };
 		873C864D1D572C6A00747B0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873C864C1D572C6A00747B0B /* AppDelegate.swift */; };
 		873C86521D572C6A00747B0B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873C86501D572C6A00747B0B /* Main.storyboard */; };
-		873C86541D572C6A00747B0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 873C86531D572C6A00747B0B /* Assets.xcassets */; };
 		873C86571D572C6A00747B0B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873C86551D572C6A00747B0B /* LaunchScreen.storyboard */; };
 		B82976B11D5ED992009E9035 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B82976B01D5ED992009E9035 /* CoreLocation.framework */; };
 		B82976B31D5ED997009E9035 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B82976B21D5ED997009E9035 /* MapKit.framework */; };
@@ -38,10 +38,10 @@
 /* Begin PBXFileReference section */
 		3CFF154C1D675DF700CD540A /* SessionTracking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionTracking.swift; sourceTree = "<group>"; };
 		78791F4D39B132AD2B5205E2 /* Pods-FriendsCircle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FriendsCircle.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FriendsCircle/Pods-FriendsCircle.debug.xcconfig"; sourceTree = "<group>"; };
+		871E8B4A1D699A9500400479 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		873C86491D572C6A00747B0B /* FriendsCircle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FriendsCircle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		873C864C1D572C6A00747B0B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		873C86511D572C6A00747B0B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		873C86531D572C6A00747B0B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		873C86561D572C6A00747B0B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		873C86581D572C6A00747B0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BB3202213F4D8D6365A5AD5 /* Pods_FriendsCircle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FriendsCircle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,10 +121,10 @@
 				B82976B41D5ED9E4009E9035 /* ViewController */,
 				873C864C1D572C6A00747B0B /* AppDelegate.swift */,
 				873C86501D572C6A00747B0B /* Main.storyboard */,
-				873C86531D572C6A00747B0B /* Assets.xcassets */,
 				873C86551D572C6A00747B0B /* LaunchScreen.storyboard */,
 				873C86581D572C6A00747B0B /* Info.plist */,
 				B8D7DBBA1D64A0CE00C10BA0 /* GoogleService-Info.plist */,
+				871E8B4A1D699A9500400479 /* Images.xcassets */,
 			);
 			path = FriendsCircle;
 			sourceTree = "<group>";
@@ -244,7 +244,7 @@
 			files = (
 				873C86571D572C6A00747B0B /* LaunchScreen.storyboard in Resources */,
 				B8D7DBBB1D64A0CE00C10BA0 /* GoogleService-Info.plist in Resources */,
-				873C86541D572C6A00747B0B /* Assets.xcassets in Resources */,
+				871E8B4B1D699A9500400479 /* Images.xcassets in Resources */,
 				873C86521D572C6A00747B0B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -434,6 +434,7 @@
 			baseConfigurationReference = 78791F4D39B132AD2B5205E2 /* Pods-FriendsCircle.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FriendsCircle/Info.plist;
@@ -449,6 +450,7 @@
 			baseConfigurationReference = D50E9120CED921D18CD95E5F /* Pods-FriendsCircle.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FriendsCircle/Info.plist;
