@@ -16,12 +16,12 @@ class LoginClient {
     var loginSuccess: (() -> ())?
     var loginFailure : ((String) -> ())?
     var ref: FIRDatabaseReference!
-    
+    let whitespace = NSCharacterSet.whitespaceCharacterSet()
     init() {
         configureDatabase()
         
     }
-    func getVerifyPhoneNumber(success: () -> (), failure: (String) -> (), phone: String) {
+    func getVerifyPhoneNumber(success: () -> (), failure: (String) -> (), phone: String, name: String) {
         
         Alamofire.request(.GET, "http://localhost:3030/test", parameters: ["phone": phone]) .responseJSON { response in
             if ((response.response) != nil) {
@@ -31,7 +31,7 @@ class LoginClient {
                         if (data["success"] as! Bool == true) {
                             let users = self.ref.child("users")
                             let verifyNumber =  data["verifyNum"] as! String
-                            let userDic = ["phoneNumber": phone, "verifyNumber": verifyNumber, "active": false, "longtitude": "", "latitude": "", "sessionId": ""]
+                            let userDic = ["name" : name ,"phoneNumber": phone, "verifyNumber": verifyNumber, "active": false, "longtitude": "", "latitude": "", "sessionId": ""]
                             users.updateChildValues([phone: userDic])
                             print("Success")
                             success()
@@ -167,11 +167,16 @@ class LoginClient {
                 print("null")
             } else {
                 let data = snapshot.value! as! NSDictionary
-                print("User Info")
-                //self.getUserInSession(data["sessionId"] as! String)
-                self.getUserInSession({ (user:User) in
-                    success(user)
-                }, sessionId: data["sessionId"] as! String)
+                let sessionId = data["sessionId"] as! String
+                if sessionId.stringByTrimmingCharactersInSet(self.whitespace) != "" {
+                    print("User Info")
+                    self.getUserInSession({ (user:User) in
+                        success(user)
+                    }, sessionId: sessionId)
+                } else {
+                    print("error no session id")
+                }
+                
             }
         })
     }

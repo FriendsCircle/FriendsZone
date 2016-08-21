@@ -17,6 +17,7 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var infoLbl: UILabel!
     @IBOutlet var phoneNumTxtField: UITextField!
+    @IBOutlet weak var nameLabel: UITextField!
     
     var users: [User]?
     var verifyNum: String = ""
@@ -30,7 +31,10 @@ class LoginViewController: UIViewController {
         if(phoneNumTxtField.text!.stringByTrimmingCharactersInSet(whitespace) == ""){
             infoLbl.text = "Please enter your \n phone number"
             return
-        }else {
+        } else if (nameLabel.text!.stringByTrimmingCharactersInSet(whitespace) == "") {
+            infoLbl.text = "Please enter your name number"
+            return
+        } else {
             let rawPhoneNum = "+84\(phoneNumTxtField.text!)"
             print(rawPhoneNum)
             let alertController = UIAlertController(title: "We are sending you an SMS containing a code to verify the phone number: \(rawPhoneNum)", message:
@@ -40,7 +44,6 @@ class LoginViewController: UIViewController {
             getVerifyPhoneNumber(rawPhoneNum)
             alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default)
             { action -> Void in
-                
                 self.performSegueWithIdentifier("verifySegue", sender: self)
             })
         }
@@ -48,11 +51,13 @@ class LoginViewController: UIViewController {
     
     func getVerifyPhoneNumber(phone:String) {
         let loginClient = LoginClient()
+        
         loginClient.getVerifyPhoneNumber({ () -> () in
             print("I get verify in")
-            }, failure: { (error) in
+        }, failure: { (error) in
                 print(error)
-            }, phone: phone)
+        }, phone: phone, name: nameLabel.text!)
+        
     }
 
     // MARK: - Navigation
