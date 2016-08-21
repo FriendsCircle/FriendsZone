@@ -98,11 +98,14 @@ class TrackingSection: NSObject {
         
         let beginString = dateFormatter.stringFromDate(begin!)
         let endString = dateFormatter.stringFromDate(end!)
-        
+        var phoneNums = [String]()
+        for user in attendUser {
+            phoneNums.append(user.phoneNumber!)
+        }
         
         
         let destination = NSDictionary(dictionary: ["longtitue": "103.444", "latitude": "37.333"])
-        let sessionTracking = ["sessionId": ("\(sessionId)"), "destination" : destination, "users": ["+841696359605", "+84905860687" , "+84937264497"], "beginTime" : beginString, "endTime": endString]
+        let sessionTracking = ["sessionId": ("\(sessionId)"), "destination" : destination, "users": phoneNums, "beginTime" : beginString, "endTime": endString]
         
         
         loginClient.createSessionTracking("\(sessionId)", sessionTracking: sessionTracking)
