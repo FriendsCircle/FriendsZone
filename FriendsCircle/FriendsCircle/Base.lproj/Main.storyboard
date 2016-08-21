@@ -174,37 +174,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q6R-GZ-qWL" id="jvQ-so-AY9">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="115.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VJD-cz-5g1">
-                                                    <rect key="frame" x="10" y="0.0" width="40" height="17"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="No Mobile Phone Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="36x-Ei-KhZ">
-                                                    <rect key="frame" x="166" y="1" width="144" height="15"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="36x-Ei-KhZ" secondAttribute="trailing" constant="10" id="43t-5b-0oA"/>
-                                                <constraint firstItem="36x-Ei-KhZ" firstAttribute="centerY" secondItem="VJD-cz-5g1" secondAttribute="centerY" id="5iL-Me-p7y"/>
-                                                <constraint firstAttribute="bottom" secondItem="VJD-cz-5g1" secondAttribute="bottom" constant="10" id="Pxx-nc-Mnf"/>
-                                                <constraint firstItem="VJD-cz-5g1" firstAttribute="top" secondItem="36x-Ei-KhZ" secondAttribute="bottom" constant="10" id="ZWc-TG-aMv"/>
-                                                <constraint firstItem="VJD-cz-5g1" firstAttribute="leading" secondItem="jvQ-so-AY9" secondAttribute="leading" constant="10" id="hvr-WT-d7x"/>
-                                            </constraints>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="ZWc-TG-aMv"/>
-                                                </mask>
-                                            </variation>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="nameLabel" destination="VJD-cz-5g1" id="ca3-Ma-AMj"/>
-                                            <outlet property="phoneNumLabel" destination="36x-Ei-KhZ" id="Ise-V2-iSu"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

@@ -13,7 +13,7 @@ class User: NSObject {
     var name: String?
     var firstName: String?
     var lastName: String?
-    var phoneNumber: String?
+    var phoneNumber: NSString?
     var verifyNumber: NSString?
     var active: Bool?
     var dictionary: NSDictionary?

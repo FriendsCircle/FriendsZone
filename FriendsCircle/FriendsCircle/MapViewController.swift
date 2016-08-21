@@ -8,7 +8,8 @@
 
 import UIKit
 import MapKit
-
+import ContactsUI
+import Contacts
 
 class MapViewController: UIViewController {
     
@@ -16,7 +17,7 @@ class MapViewController: UIViewController {
     @IBOutlet var mapView: MKMapView!
     
     
-    
+    var contactStore = CNContactStore()
     let regionRadius: CLLocationDistance = 1000
     var attendedUser = [User]()
     let currentTrackingSection = TrackingSection()
@@ -30,8 +31,13 @@ class MapViewController: UIViewController {
         // Do any additional setup after loading the view.
         mapView.delegate = self
 
+
         let user = User.currentUser
-        loginClient.getUserInfo(user!.phoneNumber!)
+        loginClient.getUserInfo(user!.phoneNumber! as String)
+
+        currentUser = User.currentUser
+        //loginClient.getUserLongLat((currentUser?.phoneNumber)! as String)
+
         //getUserInfor(currentUser.phoneNum)
         //currentSection = getSection(currentUser.SectionID)
         
@@ -52,15 +58,129 @@ class MapViewController: UIViewController {
         currentTrackingSection.destination = CLLocation(latitude: 10.7564032, longitude: 106.660236)
         
         let annotations = currentTrackingSection.locatingAllMember()
+        //print("All member:\(annotations)")
+        
+        //mapView.addAnnotations(annotations)
         
         let destination = MKPointAnnotation()
-        destination.coordinate = (currentTrackingSection.destination?.coordinate)!
+        destination.coordinate = CLLocationCoordinate2D(latitude: 10.7564032, longitude: 106.660236)
+       // let userAnoo = UserAnnotation(user: currentUser!)
         mapView.addAnnotation(destination)
+        //mapView.addAnnotation(userAnoo)
         mapView.addAnnotations(annotations)
         
     }
     
+    //MARK: additional functions
     
+    func showMessage(message: String) {
+        let alertController = UIAlertController(title: "FriendsCircle", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let dismissAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) { (action) -> Void in
+        }
+        
+        alertController.addAction(dismissAction)
+        
+        //let pushedViewControllers = (self.window?.rootViewController as! UINavigationController).viewControllers
+        //let presentedViewController = pushedViewControllers[pushedViewControllers.count - 1]
+        
+        let presentedViewController = self
+        
+        presentedViewController.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    
+    func requestForAccess(completionHandler: (accessGranted: Bool) -> Void) {
+        let authorizationStatus = CNContactStore.authorizationStatusForEntityType(CNEntityType.Contacts)
+        
+        switch authorizationStatus {
+        case .Authorized:
+            completionHandler(accessGranted: true)
+            
+        case .Denied, .NotDetermined:
+            self.contactStore.requestAccessForEntityType(CNEntityType.Contacts, completionHandler: { (access, accessError) -> Void in
+                if access {
+                    completionHandler(accessGranted: access)
+                }
+                else {
+                    if authorizationStatus == CNAuthorizationStatus.Denied {
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            let message = "\(accessError!.localizedDescription)\n\nPlease allow the app to access your contacts through the Settings."
+                            self.showMessage(message)
+                        })
+                    }
+                }
+            })
+            
+        default:
+            completionHandler(accessGranted: false)
+        }
+    }
+    
+    func fetchContact() -> Bool {
+        requestForAccess { (accessGranted) -> Void in
+            if accessGranted {
+                //let predicate = CNContact.predicateForContactsMatchingName(self.txtLastName.text!)
+                let predicate = NSPredicate(value: true) // fetch all contact list without predicating string
+                let keys = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey]
+                var contacts = [CNContact]()
+                var message: String!
+                
+                let fetchRequest = CNContactFetchRequest(keysToFetch: keys)
+                fetchRequest.mutableObjects = false
+                fetchRequest.unifyResults = true
+                fetchRequest.sortOrder = .UserDefault
+                
+                
+                let contactsStore = self.contactStore
+                
+                do {
+                    //contacts = try contactsStore.unifiedContactsMatchingPredicate(predicate, keysToFetch: keys)
+                    
+                    
+                    try CNContactStore().enumerateContactsWithFetchRequest(fetchRequest) { (contact, stop) -> Void in
+                        //do something with contact
+                        if contact.phoneNumbers.count > 0 {
+                            contacts.append(contact)
+                        }
+                    }
+                    
+                    if contacts.count == 0 {
+                        message = "No contacts were found matching the given name."
+                    }
+                }
+                catch {
+                    message = "Unable to fetch contacts."
+                }
+                
+                
+                if message != nil {
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        self.showMessage(message)
+                    })
+                }
+                else {
+                    
+                    for contact in contacts {
+                        
+                        
+                        print("\(contact.familyName), \(contact.givenName),\(contact.phoneNumbers)")
+                        print("\(contact.phoneNumbers)")
+                        for num in contact.phoneNumbers {
+                            let numVal = num.value as! CNPhoneNumber
+                            if num.label == CNLabelPhoneNumberMobile {
+                                //mobiles.append(numVal)
+                                print("\(numVal.stringValue)")
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        return true
+    }
+
     
     
     //MARK: Testing data
@@ -80,6 +200,8 @@ class MapViewController: UIViewController {
         user.coordinate = CLLocation(latitude: 10.772736, longitude: 106.658706)
         //user.coordinate?.coordinate = CLLocationCoordinate2D(latitude: 10.772736,longitude: 106.658706)
         attendedUser.append(user)
+
+
         print("\(attendedUser.count)")
     }
 
