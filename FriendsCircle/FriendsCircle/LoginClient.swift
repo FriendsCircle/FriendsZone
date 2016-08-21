@@ -113,6 +113,7 @@ class LoginClient {
     func getListPhoneNumberOfSession(data: NSDictionary){
         let listUserPhone = data["users"] as! NSArray
         for userPhone in listUserPhone {
+            // LONGLATEHERE
             let userRef = getRefFirebaseByPhoneNumber(userPhone as! String)
             let session = ["sessionId": data["sessionId"] as! String]
             userRef.updateChildValues(session)
