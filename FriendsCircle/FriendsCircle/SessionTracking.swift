@@ -16,6 +16,9 @@ class SessionTracking: NSObject {
     var endTime: NSDate?
     var dictionary: NSDictionary?
     
+//    override init() {
+//        super.init()
+//    }
     init(dictionary: NSDictionary) {
         self.dictionary = dictionary
         sessionID = dictionary["sessionID"] as? String
