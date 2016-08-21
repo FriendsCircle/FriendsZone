@@ -30,7 +30,6 @@
 		B8ADCD011D68848100A87DF8 /* DestinationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8ADCD001D68848100A87DF8 /* DestinationCell.swift */; };
 		B8ADCD031D68BAC700A87DF8 /* AddFriendsButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8ADCD021D68BAC700A87DF8 /* AddFriendsButtonCell.swift */; };
 		B8ADCD051D68BBA600A87DF8 /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8ADCD041D68BBA600A87DF8 /* FriendCell.swift */; };
-		B8B7AEAD1D63829400047FA7 /* CreateSectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B7AEAC1D63829400047FA7 /* CreateSectionViewController.swift */; };
 		B8D7DBBB1D64A0CE00C10BA0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B8D7DBBA1D64A0CE00C10BA0 /* GoogleService-Info.plist */; };
 		B8D86A081D5F574F00E61E92 /* TrackingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D86A071D5F574F00E61E92 /* TrackingSection.swift */; };
 		B8D86A0C1D5F586100E61E92 /* UserAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D86A0B1D5F586100E61E92 /* UserAnnotation.swift */; };
@@ -65,7 +64,6 @@
 		B8ADCD001D68848100A87DF8 /* DestinationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationCell.swift; sourceTree = "<group>"; };
 		B8ADCD021D68BAC700A87DF8 /* AddFriendsButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendsButtonCell.swift; sourceTree = "<group>"; };
 		B8ADCD041D68BBA600A87DF8 /* FriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
-		B8B7AEAC1D63829400047FA7 /* CreateSectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateSectionViewController.swift; sourceTree = "<group>"; };
 		B8D7DBBA1D64A0CE00C10BA0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B8D86A071D5F574F00E61E92 /* TrackingSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackingSection.swift; sourceTree = "<group>"; };
 		B8D86A0B1D5F586100E61E92 /* UserAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAnnotation.swift; sourceTree = "<group>"; };
@@ -149,7 +147,6 @@
 			isa = PBXGroup;
 			children = (
 				B860F2451D64A725009C45A0 /* VerifyViewController.swift */,
-				B8B7AEAC1D63829400047FA7 /* CreateSectionViewController.swift */,
 				B82976CF1D5F0A2E009E9035 /* ContactsListViewController.swift */,
 				B82976B51D5EDA1A009E9035 /* MapViewController.swift */,
 				B82976BE1D5EE53A009E9035 /* LoginViewController.swift */,
@@ -309,7 +306,6 @@
 			files = (
 				B8D86A081D5F574F00E61E92 /* TrackingSection.swift in Sources */,
 				B83B8B671D68C3FD00E2B324 /* FCContact.swift in Sources */,
-				B8B7AEAD1D63829400047FA7 /* CreateSectionViewController.swift in Sources */,
 				B8ADCD011D68848100A87DF8 /* DestinationCell.swift in Sources */,
 				B8A520A81D681F5800CB292A /* SectionViewController.swift in Sources */,
 				B8ADCD031D68BAC700A87DF8 /* AddFriendsButtonCell.swift in Sources */,

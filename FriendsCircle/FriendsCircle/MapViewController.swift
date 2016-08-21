@@ -22,14 +22,18 @@ class MapViewController: UIViewController {
     var attendedUser = [User]()
     let currentTrackingSection = TrackingSection()
     var currentUser: User?
-
+    var currentSection: TrackingSection?
+    let loginClient = LoginClient()
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         mapView.delegate = self
+        currentUser = User.currentUser
+        loginClient.getUserLongLat((currentUser?.phoneNumber)! as String)
+        //getUserInfor(currentUser.phoneNum)
+        //currentSection = getSection(currentUser.SectionID)
         
-        fetchContact()
         
         let workSaiGon = MKPointAnnotation()
         workSaiGon.coordinate = CLLocationCoordinate2DMake(10.7803616,106.6860085)
@@ -192,17 +196,6 @@ class MapViewController: UIViewController {
 
         print("\(attendedUser.count)")
     }
-    
-    
-    
-    func currentUserInit() {
-        
-        //currentUser?.Avatar? = UIImage(named: "avatar")!
-        //currentUser?.firstName = "Vu"
-        currentUser?.name = "Vu Nguyen"
-        currentUser?.phoneNumber = "0937264497"
-    }
-
 
 }
 

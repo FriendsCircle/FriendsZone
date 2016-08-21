@@ -162,7 +162,7 @@
                                                     <rect key="frame" x="24" y="15" width="288" height="30"/>
                                                     <state key="normal" title="Button"/>
                                                     <connections>
-                                                        <segue destination="AAn-Bg-jAm" kind="show" id="HKm-wN-5nF"/>
+                                                        <segue destination="AAn-Bg-jAm" kind="show" identifier="Section2ContactsList" id="HKm-wN-5nF"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -277,8 +277,8 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Phone Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zUp-gp-U0y">
-                                                    <rect key="frame" x="226" y="20" width="84" height="15"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="No Mobile Phone Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zUp-gp-U0y">
+                                                    <rect key="frame" x="166" y="20" width="144" height="15"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -335,7 +335,10 @@
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sVz-nU-oHY">
                                 <rect key="frame" x="233" y="7" width="71" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Apply"/>
+                                <state key="normal" title="Confirm"/>
+                                <connections>
+                                    <action selector="onConfirmPressed:" destination="AAn-Bg-jAm" eventType="touchUpInside" id="ocm-Bf-hdm"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>

@@ -10,10 +10,16 @@ import UIKit
 import Contacts
 import ContactsUI
 
+protocol ContactsListViewControllerDelegate {
+    func contactsListViewController(contactsListViewController: ContactsListViewController, didSelectedUsersList contacts: [CNContact])
+}
+
 class ContactsListViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
     var users: [User]?
+    
+    var delegate: ContactsListViewControllerDelegate?
     var contactStore = CNContactStore()
     var contacts = [CNContact]()
     var selectedContacts = [CNContact]()
@@ -141,8 +147,16 @@ class ContactsListViewController: UIViewController {
 
 
     @IBAction func dismissView(sender: AnyObject) {
+        print("Dismiss contacts list")
         navigationController?.popViewControllerAnimated(true)
     }
+    
+    @IBAction func onConfirmPressed(sender: UIButton) {
+        delegate?.contactsListViewController(self, didSelectedUsersList: selectedContacts)
+        navigationController?.popViewControllerAnimated(true)
+    }
+    
+    
 
 }
 
@@ -164,12 +178,21 @@ extension ContactsListViewController: UITableViewDelegate, UITableViewDataSource
         let cell = tableView.dequeueReusableCellWithIdentifier("ContactsCell") as! ContactsCell
         if indexPath.section == 0 {
             cell.nameLabel.text = unselectedContacts[indexPath.row].givenName
+            var flgHaveMobilePhone = false
             for num in unselectedContacts[indexPath.row].phoneNumbers {
                 let numVal = num.value as! CNPhoneNumber
                 if num.label == CNLabelPhoneNumberMobile {
-
+                    print("\(numVal.stringValue)")
+                    flgHaveMobilePhone =  true
                     cell.phoneNumLabel.text = ("\(numVal.stringValue)")
+                    cell.userInteractionEnabled = true
+                    cell.backgroundColor = UIColor.whiteColor()
                 }
+            }
+            if !flgHaveMobilePhone {
+                cell.phoneNumLabel.text = "No Mobile Phone Number"
+                cell.userInteractionEnabled = false
+                cell.backgroundColor = UIColor.cyanColor()
             }
             
         } else if indexPath.section == 1 {
@@ -178,7 +201,10 @@ extension ContactsListViewController: UITableViewDelegate, UITableViewDataSource
                 let numVal = num.value as! CNPhoneNumber
                 if num.label == CNLabelPhoneNumberMobile {
                     cell.phoneNumLabel.text = ("\(numVal.stringValue)")
+                    cell.userInteractionEnabled = true
+                    cell.backgroundColor = UIColor.whiteColor()
                 }
+                
             }
         }
         return cell
@@ -192,12 +218,12 @@ extension ContactsListViewController: UITableViewDelegate, UITableViewDataSource
         else if section == 1  { label.text = "Selected friends"}
         
         
-        label.textColor = UIColor.darkGrayColor()
+        label.textColor = UIColor.whiteColor()
         label.sizeToFit()
         view.addSubview(label)
         
         label.textAlignment = NSTextAlignment.Center
-        view.backgroundColor = UIColor.lightGrayColor()
+        view.backgroundColor = UIColor.orangeColor()
         self.view.addSubview(view)
 
         return view

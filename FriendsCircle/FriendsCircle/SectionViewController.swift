@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import Contacts
+import ContactsUI
 
 class SectionViewController: UIViewController {
     
     let loginClient = LoginClient()
     var trackingSection = TrackingSection()
+    var selectedContacts = [CNContact]()
     
     @IBOutlet var tableView: UITableView!
     
@@ -47,6 +50,13 @@ class SectionViewController: UIViewController {
         let sessionTracking = ["sessionId": ("\(sessionId)"), "destination" : destination, "users": ["+841696359605", "+84905860687" , "+84937264497"], "beginTime" : "", "endTime": ""]
         loginClient.createSessionTracking("\(sessionId)", sessionTracking: sessionTracking)
         
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "Section2ContactsList" {
+            let contactsVC = segue.destinationViewController as! ContactsListViewController
+            contactsVC.delegate = self
+        }
     }
   
 }
@@ -100,6 +110,13 @@ extension SectionViewController: UITableViewDelegate, UITableViewDataSource {
                 return friendCell
             }
         }
+    }
+}
+extension SectionViewController: ContactsListViewControllerDelegate {
+    func contactsListViewController(contactsListViewController: ContactsListViewController, didSelectedUsersList contacts: [CNContact]) {
+        print("delegate success")
+        self.selectedContacts = contacts
+        print("\(self.selectedContacts)")
     }
 }
 
