@@ -30,44 +30,54 @@ class MapViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         mapView.delegate = self
-
-
+        
+        let workSaiGon = MKPointAnnotation()
+        workSaiGon.coordinate = CLLocationCoordinate2DMake(10.7803616,106.6860085)
+        
+        mapView.addAnnotation(workSaiGon)
+        let initRegion = MKCoordinateRegionMakeWithDistance(workSaiGon.coordinate, self.regionRadius * 1.0 , self.regionRadius * 1.0)
+        self.mapView.setRegion(initRegion, animated: false)
+        
         let user = User.currentUser
-        loginClient.getUserInfo(user!.phoneNumber! as String)
+        //loginClient.getUserInfo(user!.phoneNumber! as String)
+        loginClient.getUserInfo({ (user: User) in
+            self.currentTrackingSection.addUser(user)
+            
+            let annotation = MKPointAnnotation()
+            annotation.coordinate.longitude = user.longtitude!
+            annotation.coordinate.latitude = user.latitude!
+            
+            print(annotation.coordinate)
+            self.mapView.addAnnotation(annotation)
+           
+        }, phone: user!.phoneNumber as! String)
 
-        currentUser = User.currentUser
+        //currentUser = User.currentUser
         //loginClient.getUserLongLat((currentUser?.phoneNumber)! as String)
 
         //getUserInfor(currentUser.phoneNum)
         //currentSection = getSection(currentUser.SectionID)
         
         
-        let workSaiGon = MKPointAnnotation()
-        workSaiGon.coordinate = CLLocationCoordinate2DMake(10.7803616,106.6860085)
-        
-        let initRegion = MKCoordinateRegionMakeWithDistance(workSaiGon.coordinate, regionRadius * 2.0 , regionRadius * 2.0)
-        mapView.setRegion(initRegion, animated: false)
         
         
-        testDataInit()
+        
+        //testDataInit()
 
-       for user in attendedUser {
-            currentTrackingSection.addUser(user)
-        }
+//       for user in attendedUser {
+//            currentTrackingSection.addUser(user)
+//        }
+//        
+//        currentTrackingSection.destination = CLLocation(latitude: 10.7564032, longitude: 106.660236)
         
-        currentTrackingSection.destination = CLLocation(latitude: 10.7564032, longitude: 106.660236)
         
-        let annotations = currentTrackingSection.locatingAllMember()
         //print("All member:\(annotations)")
         
         //mapView.addAnnotations(annotations)
         
-        let destination = MKPointAnnotation()
-        destination.coordinate = CLLocationCoordinate2D(latitude: 10.7564032, longitude: 106.660236)
+        
        // let userAnoo = UserAnnotation(user: currentUser!)
-        mapView.addAnnotation(destination)
-        //mapView.addAnnotation(userAnoo)
-        mapView.addAnnotations(annotations)
+        
         
     }
     

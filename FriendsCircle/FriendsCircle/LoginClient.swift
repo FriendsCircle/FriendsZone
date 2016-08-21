@@ -120,7 +120,7 @@ class LoginClient {
     }
     
     
-    func getUserInSession(sessionId: String) {
+    func getUserInSession(success: (User) -> (), sessionId: String) {
         let sessionRef = getRefFirebaseSessionTracking(sessionId)
         let handle = sessionRef.observeEventType(.Value, withBlock: { snapshot in
             if snapshot.value is NSNull {
@@ -128,7 +128,9 @@ class LoginClient {
             } else {
                 let data = snapshot.value! as! NSDictionary
                 // callback
-                self.getUsersLongLatInSession(data)
+                self.getUsersLongLatInSession(data, success: { (user: User) in
+                    success(user)
+                })
             }
             
             }, withCancelBlock: { error in
@@ -137,7 +139,7 @@ class LoginClient {
         ref.removeObserverWithHandle(handle)
     }
 
-    func getUsersLongLatInSession(data: NSDictionary) {
+    func getUsersLongLatInSession(data: NSDictionary, success: (User) -> ()) {
         let listUserPhone = data["users"] as! NSArray
         for userPhone in listUserPhone {
             let userRef = getRefFirebaseByPhoneNumber(userPhone as! String)
@@ -147,26 +149,29 @@ class LoginClient {
                 } else {
                     let data = snapshot.value! as! NSDictionary
                     // callback
-                    print("users long lat in session \(data)")
+                    let tempUser = User(dictionary: data)
+                    success(tempUser)
                     
                 }
-                
             }, withCancelBlock: { error in
                 print(error.description)
             })
-
+            
         }
     }
     
-    func getUserInfo(phone: String) {
-        let userRef = getRefFirebaseByPhoneNumber(phone)
-        userRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
+    func getUserInfo(success: (User) ->  (),phone: String) {
+        let userRef = getRefFirebaseByPhoneNumber("5555")
+        userRef.observeEventType(.Value, withBlock: { snapshot in
             if snapshot.value is NSNull {
-                
+                print("null")
             } else {
                 let data = snapshot.value! as! NSDictionary
                 print("User Info")
                 //self.getUserInSession(data["sessionId"] as! String)
+                self.getUserInSession({ (user:User) in
+                    success(user)
+                }, sessionId: data["sessionId"] as! String)
             }
         })
     }
