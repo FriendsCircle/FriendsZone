@@ -40,7 +40,7 @@ class SectionViewController: UIViewController {
     
     @IBAction func onSubmitPressed(sender: UIBarButtonItem) {
         trackingSection.submitSection()
-        dismissViewControllerAnimated(true, completion: nil)
+        navigationController?.popViewControllerAnimated(true)
 
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -66,8 +66,6 @@ extension SectionViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 18))
         let label = UILabel(frame: CGRect(x: 10, y: 5, width: 50, height: 15))
-        //label.font =  UIFont.fontWithSize(17.0)
-        //label.font = UIFont.boldSystemFontOfSize(15.0)
         
         if section == 0  { label.text = "Time of Section"}
         else if section == 1  { label.text = "Destination"}
@@ -109,7 +107,6 @@ extension SectionViewController: UITableViewDelegate, UITableViewDataSource {
                     }
                     
                 }
-                //friendCell.nameLabel = selectedContacts[indexPath.row -1]
                 return friendCell
             }
         }
@@ -124,11 +121,15 @@ extension SectionViewController: ContactsListViewControllerDelegate {
                 let numVal = num.value as! CNPhoneNumber
                 if num.label == CNLabelPhoneNumberMobile {
                     phoneNum = "\(numVal.stringValue)"
-                }
             let user = User(phoneNumber: phoneNum!)
-                users.append(user)
+                user.firstName = contact.givenName
+                    trackingSection.attendUser.append(user)}
         }
         self.selectedContacts = contacts
+            for user in trackingSection.attendUser {
+                print(user.firstName!)
+                print(user.phoneNumber!)
+            }
         tableView.reloadData()
         print("\(self.selectedContacts)")
     }

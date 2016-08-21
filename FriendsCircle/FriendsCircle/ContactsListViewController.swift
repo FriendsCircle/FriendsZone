@@ -45,9 +45,6 @@ class ContactsListViewController: UIViewController {
         
         alertController.addAction(dismissAction)
         
-        //let pushedViewControllers = (self.window?.rootViewController as! UINavigationController).viewControllers
-        //let presentedViewController = pushedViewControllers[pushedViewControllers.count - 1]
-        
         let presentedViewController = self
         
         presentedViewController.presentViewController(alertController, animated: true, completion: nil)
@@ -83,8 +80,6 @@ class ContactsListViewController: UIViewController {
     func fetchContact() -> Bool {
         requestForAccess { (accessGranted) -> Void in
             if accessGranted {
-                //let predicate = CNContact.predicateForContactsMatchingName(self.txtLastName.text!)
-                let predicate = NSPredicate(value: true) // fetch all contact list without predicating string
                 let keys = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey]
                 
                 var message: String!

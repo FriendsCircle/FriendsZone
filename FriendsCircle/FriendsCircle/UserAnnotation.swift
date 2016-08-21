@@ -21,7 +21,7 @@ class UserAnnotation: NSObject, MKAnnotation {
     }
     
     var key: String {
-        return user.phoneNumber as! String
+        return user.phoneNumber!
     }
     
     func updateLocation(location: CLLocationCoordinate2D) {
