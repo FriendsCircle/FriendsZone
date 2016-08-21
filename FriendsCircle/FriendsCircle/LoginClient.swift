@@ -31,7 +31,7 @@ class LoginClient {
                         if (data["success"] as! Bool == true) {
                             let users = self.ref.child("users")
                             let verifyNumber =  data["verifyNum"] as! String
-                            let userDic = ["phoneNumber": phone, "verifyNumber": verifyNumber, "active": false]
+                            let userDic = ["phoneNumber": phone, "verifyNumber": verifyNumber, "active": false, "longtitude": "", "latitude": "", "sessionId": ""]
                             users.updateChildValues([phone: userDic])
                             print("Success")
                             success()
@@ -161,7 +161,7 @@ class LoginClient {
     }
     
     func getUserInfo(success: (User) ->  (),phone: String) {
-        let userRef = getRefFirebaseByPhoneNumber("5555")
+        let userRef = getRefFirebaseByPhoneNumber(phone)
         userRef.observeEventType(.Value, withBlock: { snapshot in
             if snapshot.value is NSNull {
                 print("null")
