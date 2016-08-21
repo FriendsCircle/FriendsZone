@@ -33,10 +33,7 @@ class LoginViewController: UIViewController {
         performSegueWithIdentifier("verifySegue", sender: self)
     }
     
-    @IBAction func onFetchButton(sender: UIButton) {
-        //fetchContact()
-        //performSegueWithIdentifier("Login2ContactsList", sender: self)
-    }
+
     
     func getVerifyPhoneNumber(phone:String) {
         
@@ -49,10 +46,7 @@ class LoginViewController: UIViewController {
                 print(error)
             }, phone: phone)
     }
-    
-    //This function gets all the contact from iPhone. Currently, it gets first name, last name and phonenumber. With phonenumber, it gets phone in field CNLabelPhoneNumberMobile, it needs to be more investigated to get true mobilephone number
-    
-    
+
     
     // MARK: - Navigation
 

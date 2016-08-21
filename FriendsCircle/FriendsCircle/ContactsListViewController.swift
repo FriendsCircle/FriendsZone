@@ -30,9 +30,7 @@ class ContactsListViewController: UIViewController {
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
     }
-    
-    
-    
+
     func showMessage(message: String) {
         let alertController = UIAlertController(title: "FriendsCircle", message: message, preferredStyle: UIAlertControllerStyle.Alert)
         
@@ -48,7 +46,6 @@ class ContactsListViewController: UIViewController {
         
         presentedViewController.presentViewController(alertController, animated: true, completion: nil)
     }
-    
     
     func requestForAccess(completionHandler: (accessGranted: Bool) -> Void) {
         let authorizationStatus = CNContactStore.authorizationStatusForEntityType(CNEntityType.Contacts)
@@ -141,7 +138,6 @@ class ContactsListViewController: UIViewController {
         
         return true
     }
-
 
     @IBAction func onBackPressed(sender: UIBarButtonItem) {
         print("Back is pressed")

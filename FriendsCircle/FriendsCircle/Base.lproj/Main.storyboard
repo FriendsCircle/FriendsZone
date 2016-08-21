@@ -29,13 +29,6 @@
                                     <action selector="onLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EPs-YY-K7q"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hCK-l6-US2">
-                                <rect key="frame" x="115" y="338" width="90" height="30"/>
-                                <state key="normal" title="fetchContact"/>
-                                <connections>
-                                    <action selector="onFetchButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="i8E-sV-YTe"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4sN-xl-BR4">
                                 <rect key="frame" x="112" y="225" width="97" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -45,9 +38,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="3Wg-JB-urr" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="X71-pu-I1v"/>
-                            <constraint firstItem="hCK-l6-US2" firstAttribute="top" secondItem="3Wg-JB-urr" secondAttribute="bottom" constant="39" id="c3y-zR-S2o"/>
                             <constraint firstItem="3Wg-JB-urr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="niB-Z1-HTC"/>
-                            <constraint firstItem="hCK-l6-US2" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pZd-Rd-xxO"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
