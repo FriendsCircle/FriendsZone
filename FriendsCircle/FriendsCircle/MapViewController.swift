@@ -47,7 +47,7 @@ class MapViewController: UIViewController {
             print(annotation.coordinate)
             self.mapView.addAnnotation(annotation)
            
-        }, phone: user!.phoneNumber as! String)
+        }, phone: user!.phoneNumber!)
 
 
         //currentUser = User.currentUser

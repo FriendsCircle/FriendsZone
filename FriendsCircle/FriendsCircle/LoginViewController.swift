@@ -58,6 +58,6 @@ class LoginViewController: UIViewController {
     // MARK: - Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let verifyVC = segue.destinationViewController as! VerifyViewController
-        verifyVC.phoneNum = phoneNumTxtField.text!
+        verifyVC.phoneNum = "+84\(phoneNumTxtField.text!)"
     }
 }

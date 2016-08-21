@@ -15,7 +15,7 @@ class VerifyViewController: UIViewController {
     var phoneNum: String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-        phoneLbl.text = "Sent to +84\(phoneNum)"
+        phoneLbl.text = phoneNum
     }
 
     override func didReceiveMemoryWarning() {
