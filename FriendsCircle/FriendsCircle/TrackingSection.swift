@@ -29,18 +29,19 @@ class TrackingSection: NSObject {
         var annotation = MKPointAnnotation()
         for user in attendUser {
             annotation = MKPointAnnotation()
-            annotation.coordinate = (user.coordinate?.coordinate)!
+            annotation.coordinate.longitude = user.longtitude!
+            annotation.coordinate.longitude = user.latitude!
             annotation.title = user.name ?? "no name"
-            print("\(user.coordinate!.coordinate)")
+            //print("\(user.coordinate!.coordinate)")
             annotations.append(annotation)
             
-            let userLocation = CLLocation(latitude: (user.coordinate?.coordinate.latitude)!, longitude: (user.coordinate?.coordinate.longitude)!)
+            let userLocation = CLLocation(latitude: (user.latitude)!, longitude: (user.longtitude)!)
             
            
             if self.destination != nil {
                 
                 print("\(destination?.distanceFromLocation(userLocation))")
-                timingCalculation(user.coordinate!.coordinate, destination: (self.destination?.coordinate)! )
+                //timingCalculation(user.coordinate!.coordinate, destination: (self.destination?.coordinate)! )
             }
         }
         

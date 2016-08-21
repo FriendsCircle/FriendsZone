@@ -19,8 +19,8 @@ class User: NSObject {
     var dictionary: NSDictionary?
     var coordinate: CLLocation?
     var sessionId: String?
-    var longtitude: String?
-    var latitude: String?
+    var longtitude: Double?
+    var latitude: Double?
     let loginClient = LoginClient()
     
     init(dictionary: NSDictionary) {
@@ -31,8 +31,8 @@ class User: NSObject {
         active = dictionary["active"] as? Bool
         coordinate = dictionary["coordinate"] as? CLLocation
         sessionId = dictionary["sessionId"] as? String
-        longtitude = dictionary["longtitude"] as? String
-        latitude = dictionary["latitude"] as? String
+        longtitude = dictionary["longtitude"] as? Double
+        latitude = dictionary["latitude"] as? Double
 
         super.init()
     }
