@@ -54,35 +54,8 @@ class MapViewController: UIViewController {
                 
             }
         }, phone: user!.phoneNumber!)
-
-
-        //currentUser = User.currentUser
-        //loginClient.getUserLongLat((currentUser?.phoneNumber)! as String)
-
-        //getUserInfor(currentUser.phoneNum)
-        //currentSection = getSection(currentUser.SectionID)
-
-        //testDataInit()
-
-//       for user in attendedUser {
-//            currentTrackingSection.addUser(user)
-//        }
-//        
-//        currentTrackingSection.destination = CLLocation(latitude: 10.7564032, longitude: 106.660236)
-        //print("All member:\(annotations)")
-        //mapView.addAnnotations(annotations)
-       // let userAnoo = UserAnnotation(user: currentUser!)
-//        let annotations = currentTrackingSection.locatingAllMember()
-//        let destination = MKPointAnnotation()
-//        destination.coordinate = CLLocationCoordinate2D(latitude: 10.7564032, longitude: 106.660236)
-//       
-//        mapView.addAnnotation(destination)
-//        mapView.addAnnotations(annotations)
-//
     }
 
-
-//    print("\(attendedUser.count)")
     
     func addAnnotationAtCoordinate(coordinate: CLLocationCoordinate2D, name: String) {
         let annotation = MKPointAnnotation()
