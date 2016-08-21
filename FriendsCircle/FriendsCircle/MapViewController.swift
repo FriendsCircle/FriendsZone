@@ -22,7 +22,7 @@ class MapViewController: UIViewController {
     var currentSection: TrackingSection?
     let loginClient = LoginClient()
     var locationManager : CLLocationManager!
-
+    let user = User.currentUser
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,23 +36,10 @@ class MapViewController: UIViewController {
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        locationManager.distanceFilter = 200
+        locationManager.distanceFilter = 20
         locationManager.requestWhenInUseAuthorization()
-//        
-//        let vietNameWork = MKPointAnnotation()
-//        vietNameWork.coordinate = CLLocationCoordinate2DMake(10.7709945,106.686252)
-//        addAnnotationAtCoordinate(vietNameWork.coordinate)
         
         
-        // Do any additional setup after loadi®ng the view.
-        
-        
-//        let workSaiGon = MKPointAnnotation()
-//        workSaiGon.coordinate = CLLocationCoordinate2DMake(10.7803616,106.6860085)
-//        let initRegion = MKCoordinateRegionMakeWithDistance(workSaiGon.coordinate, self.regionRadius * 1.0 , self.regionRadius * 1.0)
-//        self.mapView.setRegion(initRegion, animated: false)
-        
-        let user = User.currentUser
         loginClient.getUserInfo({ (user: User) in
             let tempAnnotation: MKPointAnnotation!
             if user.longtitude != nil && user.latitude != nil {
@@ -64,7 +51,6 @@ class MapViewController: UIViewController {
                 tempAnnotation.title = str
                 print(tempAnnotation.coordinate)
                 self.addAnnotationAtCoordinate(tempAnnotation.coordinate, name: user.name!)
-                
                 
             }
         }, phone: user!.phoneNumber!)
@@ -93,7 +79,6 @@ class MapViewController: UIViewController {
 //        mapView.addAnnotation(destination)
 //        mapView.addAnnotations(annotations)
 //
-        
     }
 
 
@@ -143,6 +128,12 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             let span = MKCoordinateSpanMake(0.1, 0.1)
             let region = MKCoordinateRegionMake(location.coordinate, span)
             mapView.setRegion(region, animated: false)
+            let userRef = loginClient.getRefFirebaseByPhoneNumber((user?.phoneNumber)!)
+            let longtitude = ["longtitude": location.coordinate.longitude]
+            let latitude = ["latitude": location.coordinate.latitude]
+            userRef.updateChildValues(latitude)
+            userRef.updateChildValues(longtitude)
+            
         }
     }
     
