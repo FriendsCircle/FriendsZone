@@ -203,6 +203,9 @@ class MapViewController: UIViewController {
         currentUser?.phoneNumber = "0937264497"
     }
 
+    @IBAction func logoutTapped(sender: AnyObject) {
+        loginClient.logout()
+    }
 
 }
 

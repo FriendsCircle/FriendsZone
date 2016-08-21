@@ -238,6 +238,11 @@
                                 <segue destination="apc-QJ-7Z5" kind="show" id="gGJ-Sd-dMn"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="WVr-oP-nwA">
+                            <connections>
+                                <action selector="logoutTapped:" destination="Wlr-h7-VbS" id="CAd-uD-VhN"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>

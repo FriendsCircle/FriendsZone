@@ -36,6 +36,7 @@ class SectionViewController: UIViewController {
     
     @IBAction func onSubmitPressed(sender: UIBarButtonItem) {
         print("From \(trackingSection.begin) to \(trackingSection.end)")
+        createSession(sender)
         dismissViewControllerAnimated(true, completion: nil)
     }
     

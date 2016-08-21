@@ -21,7 +21,7 @@ class User: NSObject {
     var sessionId: String?
     var longtitude: String?
     var latitude: String?
-    
+    let loginClient = LoginClient()
     init(dictionary: NSDictionary) {
         self.dictionary = dictionary
         name = dictionary["name"] as? String
@@ -68,6 +68,23 @@ class User: NSObject {
             }
             defaults.synchronize()
         }
+    }
+    
+    /*
+     * This function need phone number of user, get data and update long lat, add new annotaion in behind block
+     */
+    
+    func getUserLongLat(phone: String) {
+        let userRef = loginClient.getRefFirebaseByPhoneNumber(phone)
+        userRef.observeEventType(.Value, withBlock: { snapshot in
+            if snapshot.value is NSNull {
+                
+            } else {
+                let data = snapshot.value! as! NSDictionary
+                // callback
+                print(data)
+            }
+        })
     }
 }
 
