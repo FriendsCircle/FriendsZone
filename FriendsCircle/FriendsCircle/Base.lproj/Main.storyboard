@@ -174,7 +174,31 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q6R-GZ-qWL" id="jvQ-so-AY9">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="115.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0XO-6E-PO5">
+                                                    <rect key="frame" x="10" y="10" width="40" height="17"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Mobile Phone Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jRR-Mp-yIU">
+                                                    <rect key="frame" x="166.5" y="11" width="143.5" height="15"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="0XO-6E-PO5" firstAttribute="leading" secondItem="jvQ-so-AY9" secondAttribute="leading" constant="10" id="32t-Xu-LcN"/>
+                                                <constraint firstItem="0XO-6E-PO5" firstAttribute="top" secondItem="jvQ-so-AY9" secondAttribute="top" constant="10" id="FTp-3q-B9o"/>
+                                                <constraint firstAttribute="trailing" secondItem="jRR-Mp-yIU" secondAttribute="trailing" constant="10" id="UZq-T8-6u5"/>
+                                                <constraint firstItem="jRR-Mp-yIU" firstAttribute="centerY" secondItem="0XO-6E-PO5" secondAttribute="centerY" id="zF7-uo-R0v"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="nameLabel" destination="0XO-6E-PO5" id="nlE-b1-V0R"/>
+                                            <outlet property="phoneNumLabel" destination="jRR-Mp-yIU" id="WeE-YB-zOn"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

@@ -166,7 +166,7 @@ class LoginClient {
             } else {
                 let data = snapshot.value! as! NSDictionary
                 print("User Info")
-                self.getUserInSession(data["sessionId"] as! String)
+                //self.getUserInSession(data["sessionId"] as! String)
             }
         })
     }
