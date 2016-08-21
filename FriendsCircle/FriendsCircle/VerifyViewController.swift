@@ -10,19 +10,18 @@ import UIKit
 
 class VerifyViewController: UIViewController {
 
+    @IBOutlet weak var phoneLbl: UILabel!
     @IBOutlet weak var verifyTextField: UITextField!
     var phoneNum: String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        phoneLbl.text = "Sent to +84\(phoneNum)"
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-
     }
     
-
     @IBAction func VerifyTapped(sender: AnyObject) {
         let loginClient = LoginClient()
         if let verifyText = verifyTextField.text {
