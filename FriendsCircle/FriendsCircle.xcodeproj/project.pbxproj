@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3CFF154D1D675DF700CD540A /* SessionTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFF154C1D675DF700CD540A /* SessionTracking.swift */; };
 		54CECF385C6128D3A2D81D86 /* Pods_FriendsCircle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BB3202213F4D8D6365A5AD5 /* Pods_FriendsCircle.framework */; };
 		871E8B4B1D699A9500400479 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 871E8B4A1D699A9500400479 /* Images.xcassets */; };
 		873C864D1D572C6A00747B0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873C864C1D572C6A00747B0B /* AppDelegate.swift */; };
@@ -21,7 +20,6 @@
 		B82976C51D5EF309009E9035 /* ContactsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B82976C31D5EF309009E9035 /* ContactsUI.framework */; };
 		B82976D01D5F0A2E009E9035 /* ContactsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82976CF1D5F0A2E009E9035 /* ContactsListViewController.swift */; };
 		B83B8B651D68C23800E2B324 /* ContactsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83B8B641D68C23800E2B324 /* ContactsCell.swift */; };
-		B83B8B671D68C3FD00E2B324 /* FCContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83B8B661D68C3FD00E2B324 /* FCContact.swift */; };
 		B860F2441D64A70A009C45A0 /* LoginClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B860F2431D64A70A009C45A0 /* LoginClient.swift */; };
 		B860F2461D64A725009C45A0 /* VerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B860F2451D64A725009C45A0 /* VerifyViewController.swift */; };
 		B860F2481D64A753009C45A0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B860F2471D64A753009C45A0 /* User.swift */; };
@@ -36,7 +34,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3CFF154C1D675DF700CD540A /* SessionTracking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionTracking.swift; sourceTree = "<group>"; };
 		78791F4D39B132AD2B5205E2 /* Pods-FriendsCircle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FriendsCircle.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FriendsCircle/Pods-FriendsCircle.debug.xcconfig"; sourceTree = "<group>"; };
 		871E8B4A1D699A9500400479 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		873C86491D572C6A00747B0B /* FriendsCircle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FriendsCircle.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -55,7 +52,6 @@
 		B82976C31D5EF309009E9035 /* ContactsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContactsUI.framework; path = System/Library/Frameworks/ContactsUI.framework; sourceTree = SDKROOT; };
 		B82976CF1D5F0A2E009E9035 /* ContactsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsListViewController.swift; sourceTree = "<group>"; };
 		B83B8B641D68C23800E2B324 /* ContactsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsCell.swift; sourceTree = "<group>"; };
-		B83B8B661D68C3FD00E2B324 /* FCContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FCContact.swift; sourceTree = "<group>"; };
 		B860F2431D64A70A009C45A0 /* LoginClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginClient.swift; sourceTree = "<group>"; };
 		B860F2451D64A725009C45A0 /* VerifyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyViewController.swift; sourceTree = "<group>"; };
 		B860F2471D64A753009C45A0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -159,11 +155,9 @@
 			isa = PBXGroup;
 			children = (
 				B860F2471D64A753009C45A0 /* User.swift */,
-				3CFF154C1D675DF700CD540A /* SessionTracking.swift */,
 				B8D86A071D5F574F00E61E92 /* TrackingSection.swift */,
 				B8D86A0B1D5F586100E61E92 /* UserAnnotation.swift */,
 				B860F2431D64A70A009C45A0 /* LoginClient.swift */,
-				B83B8B661D68C3FD00E2B324 /* FCContact.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -305,11 +299,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8D86A081D5F574F00E61E92 /* TrackingSection.swift in Sources */,
-				B83B8B671D68C3FD00E2B324 /* FCContact.swift in Sources */,
 				B8ADCD011D68848100A87DF8 /* DestinationCell.swift in Sources */,
 				B8A520A81D681F5800CB292A /* SectionViewController.swift in Sources */,
 				B8ADCD031D68BAC700A87DF8 /* AddFriendsButtonCell.swift in Sources */,
-				3CFF154D1D675DF700CD540A /* SessionTracking.swift in Sources */,
 				B8D86A0C1D5F586100E61E92 /* UserAnnotation.swift in Sources */,
 				B82976B61D5EDA1A009E9035 /* MapViewController.swift in Sources */,
 				B860F2441D64A70A009C45A0 /* LoginClient.swift in Sources */,
