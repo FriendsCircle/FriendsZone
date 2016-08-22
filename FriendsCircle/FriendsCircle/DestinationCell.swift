@@ -13,8 +13,9 @@ class DestinationCell: UITableViewCell {
     
     let locationManager = CLLocationManager()
     let request = MKLocalSearchRequest()
+    @IBOutlet var addDestinationButton: UIButton!
 
-    @IBOutlet var searchBar: UISearchBar!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

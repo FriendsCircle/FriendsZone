@@ -37,7 +37,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="+84" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="25d-9E-Bl4">
                                 <rect key="frame" x="20" y="208" width="36" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a1j-JH-viY">
@@ -45,7 +45,7 @@
                                 <string key="text">To identify you, we need 
 your phone number</string>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone Number" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="4sN-xl-BR4">
@@ -151,20 +151,23 @@ your phone number</string>
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="108.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <searchBar contentMode="redraw" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qD2-Ow-KJ8">
-                                                    <rect key="frame" x="10" y="10" width="300" height="96"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </searchBar>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GR2-t9-sRh">
+                                                    <rect key="frame" x="10" y="10" width="300" height="88.5"/>
+                                                    <state key="normal" title="Add Destination"/>
+                                                    <connections>
+                                                        <segue destination="p1d-s1-e3M" kind="show" identifier="Section2DestinationMap" id="YKP-TV-0r4"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="qD2-Ow-KJ8" secondAttribute="trailing" constant="10" id="314-O5-DSn"/>
-                                                <constraint firstAttribute="bottom" secondItem="qD2-Ow-KJ8" secondAttribute="bottom" constant="10" id="CFv-JZ-W1V"/>
-                                                <constraint firstItem="qD2-Ow-KJ8" firstAttribute="leading" secondItem="kds-Je-hWp" secondAttribute="leading" constant="10" id="VJS-cG-zgH"/>
-                                                <constraint firstItem="qD2-Ow-KJ8" firstAttribute="top" secondItem="kds-Je-hWp" secondAttribute="top" constant="10" id="mcO-Ey-0s6"/>
+                                                <constraint firstAttribute="trailing" secondItem="GR2-t9-sRh" secondAttribute="trailing" constant="10" id="Jda-aR-Dui"/>
+                                                <constraint firstAttribute="bottom" secondItem="GR2-t9-sRh" secondAttribute="bottom" constant="10" id="TH8-iG-apq"/>
+                                                <constraint firstItem="GR2-t9-sRh" firstAttribute="leading" secondItem="kds-Je-hWp" secondAttribute="leading" constant="10" id="UC3-1V-5x6"/>
+                                                <constraint firstItem="GR2-t9-sRh" firstAttribute="top" secondItem="kds-Je-hWp" secondAttribute="top" constant="10" id="aUf-jy-VVM"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="searchBar" destination="qD2-Ow-KJ8" id="ZUm-Gn-ihD"/>
+                                            <outlet property="addDestinationButton" destination="GR2-t9-sRh" id="NNU-vN-e2j"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddFriendsButtonCell" rowHeight="60" id="4VO-iz-Fhr" customClass="AddFriendsButtonCell" customModule="FriendsCircle" customModuleProvider="target">
@@ -247,6 +250,101 @@ your phone number</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uws-Rg-8CO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1806" y="-111"/>
+        </scene>
+        <!--Choose Destination-->
+        <scene sceneID="GaU-cx-jYW">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="p1d-s1-e3M" customClass="DestinationMapViewController" customModule="FriendsCircle" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="YyX-GG-Mqq"/>
+                        <viewControllerLayoutGuide type="bottom" id="JVz-by-Tes"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Z4H-Ht-PA1">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ggy-qW-xwK">
+                                <rect key="frame" x="0.0" y="64" width="320" height="460"/>
+                                <connections>
+                                    <outlet property="delegate" destination="p1d-s1-e3M" id="hiQ-M5-fml"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="JVz-by-Tes" firstAttribute="top" secondItem="ggy-qW-xwK" secondAttribute="bottom" id="2z5-8F-adz"/>
+                            <constraint firstItem="ggy-qW-xwK" firstAttribute="leading" secondItem="Z4H-Ht-PA1" secondAttribute="leading" id="Tpf-YH-QqP"/>
+                            <constraint firstAttribute="trailing" secondItem="ggy-qW-xwK" secondAttribute="trailing" id="eKb-bi-OYO"/>
+                            <constraint firstItem="ggy-qW-xwK" firstAttribute="top" secondItem="YyX-GG-Mqq" secondAttribute="bottom" id="n9z-TL-acq"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Choose Destination" id="6j9-qA-rAB">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="Ybe-wp-dZQ">
+                            <connections>
+                                <action selector="onBackPressed:" destination="p1d-s1-e3M" id="RY7-10-iIG"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Apply" id="ZGy-hg-Awl">
+                            <connections>
+                                <action selector="onApplyPressed:" destination="p1d-s1-e3M" id="z8d-Zx-QgH"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="mapView" destination="ggy-qW-xwK" id="FZi-Vd-JDn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NBA-NL-Dt5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2240" y="-512"/>
+        </scene>
+        <!--Location Search Table-->
+        <scene sceneID="hws-Ff-TXC">
+            <objects>
+                <tableViewController storyboardIdentifier="LocationSearchTable" id="oFV-qL-mIj" customClass="LocationSearchTable" customModule="FriendsCircle" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="WZr-Fu-oTp">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="7Fl-Ug-iGr" detailTextLabel="E8Q-pH-9nd" style="IBUITableViewCellStyleSubtitle" id="s16-2M-ZTW">
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="s16-2M-ZTW" id="HIr-fj-HcQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7Fl-Ug-iGr">
+                                            <rect key="frame" x="15" y="6" width="31.5" height="19.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="E8Q-pH-9nd">
+                                            <rect key="frame" x="15" y="25.5" width="40.5" height="13.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="oFV-qL-mIj" id="gfT-zi-ktq"/>
+                            <outlet property="delegate" destination="oFV-qL-mIj" id="Je3-Pg-8za"/>
+                        </connections>
+                    </tableView>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EFh-Wl-nly" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2617" y="-512"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="hB4-MG-f4w">
@@ -394,7 +492,7 @@ your phone number</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Zx-ve-ZOL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2258" y="-111"/>
+            <point key="canvasLocation" x="2240" y="138"/>
         </scene>
         <!--Verify View Controller-->
         <scene sceneID="h5E-X2-6gY">
@@ -428,13 +526,13 @@ your phone number</string>
                                 <string key="text">We've sent you a code to
 verify your phone number</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sent to " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FNB-IO-9Zb">
                                 <rect key="frame" x="38" y="88" width="244" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ilk-Nm-hiA">
