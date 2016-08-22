@@ -16,6 +16,7 @@ class TrackingSection: NSObject {
     var begin: NSDate?
     var end: NSDate?
     var destination: CLLocation?
+    var trackingSectionID: String?
     
     let loginClient = LoginClient()
     
@@ -92,6 +93,7 @@ class TrackingSection: NSObject {
     func submitSection() {
         
         let sessionId = Int(arc4random_uniform(UInt32(100000)))
+        trackingSectionID = "\(sessionId)"
         
         let dateFormatter = NSDateFormatter()
         

@@ -44,6 +44,12 @@ class MapViewController: UIViewController {
         locationManager.distanceFilter = 100
         locationManager.requestWhenInUseAuthorization()
         
+        loginClient.getUserInfo({ (user) in
+            print(user.sessionId)
+            }, phone: user!.phoneNumber!)
+        
+
+        
 //        loginClient.getUserInfo({ (user: [User]) in
 //
 //            print("alluser \(user)")

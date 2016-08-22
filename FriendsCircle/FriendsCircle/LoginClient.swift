@@ -180,6 +180,7 @@ class LoginClient {
                 let sessionId = data["sessionId"] as! String
                 if sessionId.stringByTrimmingCharactersInSet(self.whitespace) != "" {
                     let userTeamp = User(dictionary: data)
+                    //userTeamp.sessionId = sessionId
                     success(userTeamp)
                 } else {
                     print("error no session id")
