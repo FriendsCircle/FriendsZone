@@ -17,11 +17,12 @@ class MapViewController: UIViewController {
     
     let regionRadius: CLLocationDistance = 1000
     var attendedUser = [User]()
-    let currentTrackingSection = TrackingSection()
+    var currentTrackingSection = TrackingSection()
     var currentUser = User.currentUser
     var currentSection: TrackingSection?
     let loginClient = LoginClient()
     var locationManager : CLLocationManager!
+    var phoneNumber = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,26 +44,62 @@ class MapViewController: UIViewController {
         locationManager.distanceFilter = 100
         locationManager.requestWhenInUseAuthorization()
         
-        loginClient.getUserInfo({ (user: User) in
+        // get informaiton of current user: session id
+        self.loginClient.getUserInfo((self.currentUser?.phoneNumber)!, success: { (user: User) in
             let allAnnotations = self.mapView.annotations
             self.mapView.removeAnnotations(allAnnotations)
             //self.createAnnotation(user)
             self.currentUser = user
             print(user.sessionId)
-
             
-            self.loginClient.getUserInSession({ (u : User) in
-                print(u)
-                if self.currentUser?.phoneNumber != u.phoneNumber {
-                    self.createAnnotation(u)
+            //get information of current session
+            self.loginClient.getSessionByID((self.currentUser?.sessionId)!) { (tracking: TrackingSection) in
+                
+                self.currentTrackingSection = tracking
+                
+                
+                
+                for user in self.currentTrackingSection.attendUser {
+                    self.phoneNumber.append(user.phoneNumber!)
+                }
+                self.loginClient.getListUsersByNumbers(self.phoneNumber) { (users: [User]) in
+                    self.attendedUser = users
+                }
+                for user in self.attendedUser {
+                    print("Attended User: \(user.name): \(user.phoneNumber)")
                 }
                 
-            }, sessionId: (self.currentUser?.sessionId)!)
-        }, phone: (currentUser?.phoneNumber)!)
+//                for user in self.currentTrackingSection.attendUser {
+//                    self.createAnnotation(user)
+//                }
+            }
+        })
+        
+       
+        
 
-        loginClient.getListUser { (dictionary: NSDictionary) in
-            print(dictionary)
-        }
+        
+        
+//        loginClient.getListUser { (users: [User]) in
+//            self.attendedUser = users
+//            for user in self.attendedUser {
+//                print("Attended User: \(user.name): \(user.phoneNumber)")
+//            }
+//        }
+        
+        //        loginClient.getUserInSession({ (u : User) in
+        //            print(u)
+        //            if self.currentUser?.phoneNumber != u.phoneNumber {
+        //                self.createAnnotation(u)
+        //            }
+        //
+        //            }, sessionId: (self.currentUser?.sessionId)!)
+        
+        //        loginClient.getListUser { (dictionary: NSDictionary) in
+        //
+        //            
+        //            print(dictionary)
+        //        }
 
     }
 

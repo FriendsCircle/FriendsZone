@@ -74,12 +74,44 @@ class LoginClient {
         return usersRef.child(phone)
     }
     
-    func getListUser(success: (NSDictionary) -> ()) {
+    func getListUser(success: ([User]) -> ()) {
         ref.child("users").observeSingleEventOfType(.Value, withBlock: { snapshot in
             let data: NSDictionary = snapshot.value as! NSDictionary
-            success(data)
+            var users = [User]()
+            for keyString in data.allKeys {
+                let userDictionary = data["\(keyString)"] as! NSDictionary
+                let user = User(phoneNumber : userDictionary["phoneNumber"] as! String)
+                user.name = userDictionary["name"] as! String
+                users.append(user)
+            }
+//            for user in users {
+//                print("\(user.phoneNumber), \(user.name) ")
+//            }
+            print(data.allKeys)
+            success(users)
+            
         })
     }
+    
+    func getListUsersByNumbers(phoneNumbers: [String], success: ([User]) -> ()) {
+        ref.child("users").observeSingleEventOfType(.Value, withBlock: { snapshot in
+            let data: NSDictionary = snapshot.value as! NSDictionary
+            var users = [User]()
+            for number in phoneNumbers {
+                let userDictionary = data[number] as! NSDictionary
+                let user = User(phoneNumber : userDictionary["phoneNumber"] as! String)
+                user.name = userDictionary["name"] as! String
+                users.append(user)
+            }
+            //            for user in users {
+            //                print("\(user.phoneNumber), \(user.name) ")
+            //            }
+            print(data.allKeys)
+            success(users)
+            
+        })
+    }
+
 
     func getRefFirebaseSessionTracking(sessionId: String) -> FIRDatabaseReference {
         let sessionRef = self.ref.child("session")
@@ -127,6 +159,44 @@ class LoginClient {
             userRef.updateChildValues(session)
         }
     }
+    func getSessionByID(sessionID: String, success:(TrackingSection) -> ()) {
+        let sessionRef = getRefFirebaseSessionTracking(sessionID)
+        sessionRef.observeEventType(.Value, withBlock: { snapshot in
+            if snapshot.value is NSNull {
+                print("null")
+            } else {
+                
+                let data = snapshot.value! as! NSDictionary
+                let trackingSession = TrackingSection()
+                //get time of tracking session
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
+                dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
+                trackingSession.begin = dateFormatter.dateFromString(data["beginTime"] as! String)
+                trackingSession.end = dateFormatter.dateFromString(data["endTime"] as! String)
+                //get session ID
+                trackingSession.trackingSectionID = data["sessionId"] as! String
+                //get session destination
+                let latString = data.valueForKeyPath("destination.latitude") as! NSString
+                let longString = data.valueForKeyPath("destination.longtitue") as! NSString
+                trackingSession.destination = CLLocation(latitude: latString.doubleValue, longitude: longString.doubleValue)
+                //get session Users
+                var users = [User]()
+                let phoneNumbers = data["users"] as! [String]
+                for phoneNumber in phoneNumbers {
+                    let user = User(phoneNumber: phoneNumber)
+                    users.append(user)
+                }
+                
+                trackingSession.attendUser = users
+                
+                success(trackingSession)
+            }
+            }, withCancelBlock: { error in
+                print(error.description)
+        })
+
+    }
     
     
     func getUserInSession(success:(User) -> (), sessionId: String){
@@ -136,7 +206,7 @@ class LoginClient {
                 print("null")
             } else {
                 let data = snapshot.value! as! NSDictionary
-                // callback
+                print("Check data of users in session: \(data)")
                 self.getUsersLongLatInSession(data, success: { (user: User) in
                     success(user)
                 })
@@ -168,7 +238,8 @@ class LoginClient {
         }
     }
     
-    func getUserInfo(success: (User) ->  (),phone: String) {
+    
+    func getUserInfo(phone: String, success: (User) ->  ()) {
         let userRef = getRefFirebaseByPhoneNumber(phone)
         userRef.observeEventType(.Value, withBlock: { snapshot in
             if snapshot.value is NSNull {
@@ -183,9 +254,7 @@ class LoginClient {
                 } else {
                     print("error no session id")
                 }
-                
             }
-            
         })
     }
 

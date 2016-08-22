@@ -44,6 +44,13 @@ class User: NSObject {
     static let logoutString = "UserDidLogout"
     static var _currentUser: User?
     
+    
+    func getInforFromFirebase(string: String) {
+        loginClient.getUserInfo(phoneNumber!, success: { (user: User) in
+            self.name = user.name
+            } )
+    }
+    
     class var currentUser: User? {
         get {
             if _currentUser == nil {
