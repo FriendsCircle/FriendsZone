@@ -31,28 +31,24 @@ class MapViewController: UIViewController {
         
         mapView.delegate = self
         
-        let workSaiGon = MKPointAnnotation()
-        workSaiGon.coordinate = CLLocationCoordinate2DMake(10.7803616,106.6860085)
+        
+//        let workSaiGon = MKPointAnnotation()
+//        workSaiGon.coordinate = CLLocationCoordinate2DMake(10.7803616,106.6860085)
+//        addAnnotationAtCoordinate(workSaiGon.coordinate, name: "Work Saigon")
+//        let workSaiGon2 = MKPointAnnotation()
+//        workSaiGon2.coordinate = CLLocationCoordinate2DMake(10.8016132,106.6639988)
+//        addAnnotationAtCoordinate(workSaiGon2.coordinate, name: "Work Saigon2")
+        
         locationManager = CLLocationManager()
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        locationManager.distanceFilter = 20
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.distanceFilter = 200
         locationManager.requestWhenInUseAuthorization()
         
         
         loginClient.getUserInfo({ (user: User) in
-            let tempAnnotation: MKPointAnnotation!
-            if user.longtitude != nil && user.latitude != nil {
-                tempAnnotation = MKPointAnnotation()
-
-                tempAnnotation.coordinate = CLLocationCoordinate2DMake(user.longtitude!,user.latitude!)
-                let str = String(tempAnnotation.coordinate.longitude) +  "-" + String(tempAnnotation.coordinate.latitude)
-                print(str)
-                tempAnnotation.title = str
-                print(tempAnnotation.coordinate)
-                self.addAnnotationAtCoordinate(tempAnnotation.coordinate, name: user.name!)
-                
-            }
+            self.createAnnotation(user)
+            
         }, phone: user!.phoneNumber!)
     }
 
@@ -66,6 +62,21 @@ class MapViewController: UIViewController {
 
     @IBAction func logoutTapped(sender: AnyObject) {
         loginClient.logout()
+    }
+    
+    func createAnnotation(user: User) {
+        let tempAnnotation: MKPointAnnotation!
+        if user.longtitude != nil && user.latitude != nil {
+            tempAnnotation = MKPointAnnotation()
+            tempAnnotation.coordinate = CLLocationCoordinate2DMake(user.latitude!,user.longtitude!)
+            let str = String(tempAnnotation.coordinate.longitude) +  "-" + String(tempAnnotation.coordinate.latitude)
+            // print(str)
+            tempAnnotation.title = str
+            print(user.name!)
+            print(tempAnnotation.coordinate)
+            self.addAnnotationAtCoordinate(tempAnnotation.coordinate, name: user.name!)
+            
+        }
     }
 
 
