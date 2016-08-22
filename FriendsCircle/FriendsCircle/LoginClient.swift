@@ -22,8 +22,9 @@ class LoginClient {
         
     }
     func getVerifyPhoneNumber(success: () -> (), failure: (String) -> (), phone: String, name: String) {
-        
-        Alamofire.request(.GET, "http://localhost:3000/test", parameters: ["phone": phone]) .responseJSON { response in
+        // add link to server heroku for get verify number 
+        // https://whispering-stream-37719.herokuapp.com/test
+        Alamofire.request(.GET, "https://whispering-stream-37719.herokuapp.com/test", parameters: ["phone": phone]) .responseJSON { response in
             if ((response.response) != nil) {
                 if let res: NSHTTPURLResponse = response.response! {
                     if (res.statusCode == 200) {
@@ -161,9 +162,11 @@ class LoginClient {
         }
     }
     
-    func getUserInfo(success: (User) ->  (),phone: String) {
+    func getUserInfo(success: ([User]) ->  (),phone: String) {
         let userRef = getRefFirebaseByPhoneNumber(phone)
-        userRef.observeEventType(.Value, withBlock: { snapshot in
+        var count = 0
+        var users = [User]()
+        userRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
             if snapshot.value is NSNull {
                 print("null")
             } else {
@@ -172,13 +175,18 @@ class LoginClient {
                 if sessionId.stringByTrimmingCharactersInSet(self.whitespace) != "" {
                     print("User Info")
                     self.getUserInSession({ (user:User) in
-                        success(user)
+                    count++
+                    print(count)
+                    print(user)
+                    users.append(user)
+                    success(users)
                     }, sessionId: sessionId)
                 } else {
                     print("error no session id")
                 }
                 
             }
+            
         })
     }
 
