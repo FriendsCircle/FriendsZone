@@ -42,8 +42,9 @@ class MapViewController: UIViewController {
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter = 200
+        locationManager.distanceFilter = 100
         locationManager.requestWhenInUseAuthorization()
+
         loginClient.getListUser { (dictionary: NSDictionary) in
             print(dictionary)
         }
@@ -51,6 +52,22 @@ class MapViewController: UIViewController {
 //        loginClient.getUserInfo({ (user: User) in
 //            self.createAnnotation(user)
 //        }, phone: user!.phoneNumber!)
+
+        
+        
+        loginClient.getUserInfo({ (user: [User]) in
+            
+            let allAnnotations = self.mapView.annotations
+            self.mapView.removeAnnotations(allAnnotations)
+            
+            print("alluser \(user)")
+            for ur in user {
+                self.createAnnotation(ur)
+            }
+            
+            
+        }, phone: user!.phoneNumber!)
+
     }
 
     
@@ -71,12 +88,15 @@ class MapViewController: UIViewController {
             tempAnnotation = MKPointAnnotation()
             tempAnnotation.coordinate = CLLocationCoordinate2DMake(user.latitude!,user.longtitude!)
             let str = String(tempAnnotation.coordinate.longitude) +  "-" + String(tempAnnotation.coordinate.latitude)
+
             self.addAnnotationAtCoordinate(tempAnnotation.coordinate, name: user.name! + str)
+            tempAnnotation.title = str
+            print(user.name!)
+            print(tempAnnotation.coordinate)
+            self.addAnnotationAtCoordinate(tempAnnotation.coordinate, name: user.name!)
             
         }
     }
-
-
 }
 
 extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
@@ -109,12 +129,12 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             let span = MKCoordinateSpanMake(0.1, 0.1)
             let region = MKCoordinateRegionMake(location.coordinate, span)
             mapView.setRegion(region, animated: false)
+            
             let userRef = loginClient.getRefFirebaseByPhoneNumber((user?.phoneNumber)!)
             let longtitude = ["longtitude": location.coordinate.longitude]
             let latitude = ["latitude": location.coordinate.latitude]
             userRef.updateChildValues(latitude)
             userRef.updateChildValues(longtitude)
-            
         }
     }
     

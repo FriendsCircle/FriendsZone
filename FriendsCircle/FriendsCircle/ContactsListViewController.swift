@@ -144,15 +144,13 @@ class ContactsListViewController: UIViewController {
     @IBAction func dismissView(sender: AnyObject) {
         print("Dismiss contacts list")
         navigationController?.popViewControllerAnimated(true)
+        //dismissViewControllerAnimated(true, completion: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
     }
     
     @IBAction func onConfirmPressed(sender: UIButton) {
         delegate?.contactsListViewController(self, didSelectedUsersList: selectedContacts)
         navigationController?.popViewControllerAnimated(true)
     }
-    
-    
-
 }
 
 extension ContactsListViewController: UITableViewDelegate, UITableViewDataSource {
@@ -167,7 +165,6 @@ extension ContactsListViewController: UITableViewDelegate, UITableViewDataSource
             return selectedContacts.count
         }
     }
-    
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ContactsCell") as! ContactsCell

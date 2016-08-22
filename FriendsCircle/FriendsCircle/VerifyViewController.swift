@@ -32,13 +32,23 @@ class VerifyViewController: UIViewController {
                 print("Login Success -> performsegue with home screen")
                 self.performSegueWithIdentifier("homeSegue", sender: nil)
             }, failure: { (error: String) in
-                    print(error)
+                
+                print(error)
+                let alertController = UIAlertController(title: "Verify fail", message: "Please try again.", preferredStyle: .Alert)
+                
+                let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                alertController.addAction(defaultAction)
+                
+                self.presentViewController(alertController, animated: true, completion: nil)
             }, phone: phoneNum, verifyNumber: verifyText)
         } else {
             print("Error Verify")
         }
     }
-    
+
+    @IBAction func onBackButttruonTapped(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     
     /*
     // MARK: - Navigation

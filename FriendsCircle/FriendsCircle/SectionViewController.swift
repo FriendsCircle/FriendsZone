@@ -9,12 +9,14 @@
 import UIKit
 import Contacts
 import ContactsUI
-
+import MapKit
 class SectionViewController: UIViewController {
     
     let loginClient = LoginClient()
     var trackingSection = TrackingSection()
     var selectedContacts = [CNContact]()
+    var destinationLocation: CLLocation?
+    var destinationName: String?
     var users = [User]()
     
     @IBOutlet var tableView: UITableView!
@@ -47,6 +49,9 @@ class SectionViewController: UIViewController {
         if segue.identifier == "Section2ContactsList" {
             let contactsVC = segue.destinationViewController as! ContactsListViewController
             contactsVC.delegate = self
+        } else if segue.identifier == "Section2DestinationMap" {
+            let destinationMapVC = segue.destinationViewController as! DestinationMapViewController
+            destinationMapVC.delegate = self
         }
     }
   
@@ -90,10 +95,14 @@ extension SectionViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         } else if indexPath.section == 1 {
             let DestCell = tableView.dequeueReusableCellWithIdentifier("DestinationCell") as! DestinationCell
+            
+            DestCell.addDestinationButton.setTitle(destinationName ?? "Add Destination", forState: UIControlState.Normal)
             return DestCell
         } else {
             if indexPath.row == 0 {
             let addButtonCell = tableView.dequeueReusableCellWithIdentifier("AddFriendsButtonCell") as! AddFriendsButtonCell
+                
+                
             return addButtonCell
             } else {
                 let friendCell = tableView.dequeueReusableCellWithIdentifier("FriendCell") as! FriendCell
@@ -147,4 +156,13 @@ extension SectionViewController: DateTimeCellDelegate {
         print("\(toTime)")
     }
         
+}
+
+extension SectionViewController: DestinationMapViewControllerDelegate {
+    func GetDestination(destinationMapViewController: DestinationMapViewController, didChooseDestination destination: CLLocation, destinationName place: String) {
+        trackingSection.destination = destination
+        destinationLocation = destination
+        destinationName = place
+        tableView.reloadData()
+    }
 }

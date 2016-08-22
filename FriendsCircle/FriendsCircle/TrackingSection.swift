@@ -27,6 +27,7 @@ class TrackingSection: NSObject {
     func locatingAllMember() -> [MKAnnotation] {
         var annotations = [MKAnnotation]()
         var annotation = MKPointAnnotation()
+        //var isChanged = false
         for user in attendUser {
             annotation = MKPointAnnotation()
             annotation.coordinate.longitude = user.longtitude!
@@ -105,8 +106,9 @@ class TrackingSection: NSObject {
         }
         
         
-        let destination = NSDictionary(dictionary: ["longtitue": "103.444", "latitude": "37.333"])
-        let sessionTracking = ["sessionId": ("\(sessionId)"), "destination" : destination, "users": phoneNums, "beginTime" : beginString, "endTime": endString]
+        let destinationDictionary = NSDictionary(dictionary: ["longtitue": "\((destination?.coordinate.longitude)!)", "latitude": "\((destination?.coordinate.latitude)!)"])
+        print("Submit destination \(destinationDictionary)")
+        let sessionTracking = ["sessionId": ("\(sessionId)"), "destination" : destinationDictionary, "users": phoneNums, "beginTime" : beginString, "endTime": endString]
         
         
         loginClient.createSessionTracking("\(sessionId)", sessionTracking: sessionTracking)
