@@ -537,7 +537,10 @@ verify your phone number</string>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ilk-Nm-hiA">
                                 <rect key="frame" x="10" y="166" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="back"/>
+                                <connections>
+                                    <action selector="onBackButttruonTapped:" destination="Dua-Cz-gj4" eventType="touchUpInside" id="RGW-bq-1cT"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
