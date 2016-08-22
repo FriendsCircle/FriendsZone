@@ -150,7 +150,6 @@ class ContactsListViewController: UIViewController {
     @IBAction func dismissView(sender: AnyObject) {
         print("Dismiss contacts list")
         navigationController?.popViewControllerAnimated(true)
-        //dismissViewControllerAnimated(true, completion: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
     }
     
     @IBAction func onConfirmPressed(sender: UIButton) {
