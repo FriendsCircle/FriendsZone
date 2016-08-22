@@ -160,6 +160,7 @@ extension SectionViewController: DateTimeCellDelegate {
 
 extension SectionViewController: DestinationMapViewControllerDelegate {
     func GetDestination(destinationMapViewController: DestinationMapViewController, didChooseDestination destination: CLLocation, destinationName place: String) {
+        trackingSection.destination = destination
         destinationLocation = destination
         destinationName = place
         tableView.reloadData()
