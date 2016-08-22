@@ -31,7 +31,6 @@ class MapViewController: UIViewController {
         
         mapView.delegate = self
         
-        
 //        let workSaiGon = MKPointAnnotation()
 //        workSaiGon.coordinate = CLLocationCoordinate2DMake(10.7803616,106.6860085)
 //        addAnnotationAtCoordinate(workSaiGon.coordinate, name: "Work Saigon")
@@ -39,25 +38,26 @@ class MapViewController: UIViewController {
 //        workSaiGon2.coordinate = CLLocationCoordinate2DMake(10.8016132,106.6639988)
 //        addAnnotationAtCoordinate(workSaiGon2.coordinate, name: "Work Saigon2")
         
-        
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.distanceFilter = 100
         locationManager.requestWhenInUseAuthorization()
-
+        
+//        loginClient.getUserInfo({ (user: [User]) in
 //
-        loginClient.getUserInfo({ (user: User) in
-            let allAnnotations = self.mapView.annotations
-            self.mapView.removeAnnotations(allAnnotations)
-            self.createAnnotation(user)
-            self.currentUser = user
-           
-//            self.loginClient.getUserInSession({ (u : User) in
-//                print(u)
-//                self.createAnnotation(u)
-//                }, sessionId: (self.currentUser?.sessionId)!)
-        }, phone: user!.phoneNumber!)
+//            print("alluser \(user)")
+//            for ur in user {
+//                self.createAnnotation(ur)
+//            }
+//            
+//        }, phone: user!.phoneNumber!)
+        
+
+        loginClient.getListUser { (dictionary: NSDictionary) in
+            print(dictionary)
+        }
+
     }
 
     
@@ -73,21 +73,21 @@ class MapViewController: UIViewController {
     }
     
     func createAnnotation(user: User) {
-            
-        
-//        if user.longtitude != nil && user.latitude != nil {
-//            tempAnnotation = MKPointAnnotation()
-//            tempAnnotation.coordinate = CLLocationCoordinate2DMake(user.latitude!,user.longtitude!)
-//            let str = String(tempAnnotation.coordinate.longitude) +  "-" + String(tempAnnotation.coordinate.latitude)
-//            self.addAnnotationAtCoordinate(tempAnnotation.coordinate, name: user.name! + str)
-//            tempAnnotation.title = str
-        
+        let tempAnnotation: MKPointAnnotation!
+        if user.longtitude != nil && user.latitude != nil {
+            tempAnnotation = MKPointAnnotation()
+            tempAnnotation.coordinate = CLLocationCoordinate2DMake(user.latitude!,user.longtitude!)
+            let str = String(tempAnnotation.coordinate.longitude) +  "-" + String(tempAnnotation.coordinate.latitude)
 
-            let userAnnotation = UserAnnotation(user: user)
-            userAnnotation.updateLocation(CLLocationCoordinate2DMake(user.latitude!,user.longtitude!))
-            self.addAnnotationAtCoordinate(UserAnnotation(user: user).coordinate, name: user.name!)
-//
-//        }
+            self.addAnnotationAtCoordinate(tempAnnotation.coordinate, name: user.name! + str)
+            tempAnnotation.title = str
+            print(user.name!)
+            print(tempAnnotation.coordinate)
+            
+//            self.addAnnotationAtCoordinate(tempAnnotation.coordinate, name: user.name!)
+            
+            
+        }
     }
 }
 
@@ -103,6 +103,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             annotationView!.leftCalloutAccessoryView = UIImageView(frame: CGRect(x:0, y:0, width: 50, height:50))
             
         }
+        
         //let coordinateString = "\(annotation.coordinate.latitude), \(annotation.coordinate.longitude)"
         //let imageView = annotationView?.leftCalloutAccessoryView as! UIImageView
         //imageView.image = annotation!.thumnail
@@ -118,7 +119,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
-            let span = MKCoordinateSpanMake(0.5, 0.5)
+            let span = MKCoordinateSpanMake(0.1, 0.1)
             let region = MKCoordinateRegionMake(location.coordinate, span)
             mapView.setRegion(region, animated: false)
             
