@@ -46,8 +46,16 @@ class MapViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
         
         
-        loginClient.getUserInfo({ (user: User) in
-            self.createAnnotation(user)
+        loginClient.getUserInfo({ (user: [User]) in
+            
+            let allAnnotations = self.mapView.annotations
+            self.mapView.removeAnnotations(allAnnotations)
+            
+            print("alluser \(user)")
+            for ur in user {
+                self.createAnnotation(ur)
+            }
+            
             
         }, phone: user!.phoneNumber!)
         

@@ -27,6 +27,7 @@ class TrackingSection: NSObject {
     func locatingAllMember() -> [MKAnnotation] {
         var annotations = [MKAnnotation]()
         var annotation = MKPointAnnotation()
+        //var isChanged = false
         for user in attendUser {
             annotation = MKPointAnnotation()
             annotation.coordinate.longitude = user.longtitude!

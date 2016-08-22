@@ -162,9 +162,11 @@ class LoginClient {
         }
     }
     
-    func getUserInfo(success: (User) ->  (),phone: String) {
+    func getUserInfo(success: ([User]) ->  (),phone: String) {
         let userRef = getRefFirebaseByPhoneNumber(phone)
-        userRef.observeEventType(.Value, withBlock: { snapshot in
+        var count = 0
+        var users = [User]()
+        userRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
             if snapshot.value is NSNull {
                 print("null")
             } else {
@@ -173,13 +175,18 @@ class LoginClient {
                 if sessionId.stringByTrimmingCharactersInSet(self.whitespace) != "" {
                     print("User Info")
                     self.getUserInSession({ (user:User) in
-                        success(user)
+                    count++
+                    print(count)
+                    print(user)
+                    users.append(user)
+                    success(users)
                     }, sessionId: sessionId)
                 } else {
                     print("error no session id")
                 }
                 
             }
+            
         })
     }
 

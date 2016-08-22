@@ -12,6 +12,8 @@
 		873C864D1D572C6A00747B0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873C864C1D572C6A00747B0B /* AppDelegate.swift */; };
 		873C86521D572C6A00747B0B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873C86501D572C6A00747B0B /* Main.storyboard */; };
 		873C86571D572C6A00747B0B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873C86551D572C6A00747B0B /* LaunchScreen.storyboard */; };
+		B81414CA1D6A1D8700296330 /* DestinationMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81414C91D6A1D8700296330 /* DestinationMapViewController.swift */; };
+		B81414CC1D6A20D800296330 /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81414CB1D6A20D800296330 /* LocationSearchTable.swift */; };
 		B82976B11D5ED992009E9035 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B82976B01D5ED992009E9035 /* CoreLocation.framework */; };
 		B82976B31D5ED997009E9035 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B82976B21D5ED997009E9035 /* MapKit.framework */; };
 		B82976B61D5EDA1A009E9035 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82976B51D5EDA1A009E9035 /* MapViewController.swift */; };
@@ -42,6 +44,8 @@
 		873C86561D572C6A00747B0B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		873C86581D572C6A00747B0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BB3202213F4D8D6365A5AD5 /* Pods_FriendsCircle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FriendsCircle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B81414C91D6A1D8700296330 /* DestinationMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationMapViewController.swift; sourceTree = "<group>"; };
+		B81414CB1D6A20D800296330 /* LocationSearchTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
 		B82976B01D5ED992009E9035 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		B82976B21D5ED997009E9035 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		B82976B51D5EDA1A009E9035 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -142,6 +146,8 @@
 		B82976B41D5ED9E4009E9035 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				B81414CB1D6A20D800296330 /* LocationSearchTable.swift */,
+				B81414C91D6A1D8700296330 /* DestinationMapViewController.swift */,
 				B860F2451D64A725009C45A0 /* VerifyViewController.swift */,
 				B82976CF1D5F0A2E009E9035 /* ContactsListViewController.swift */,
 				B82976B51D5EDA1A009E9035 /* MapViewController.swift */,
@@ -310,7 +316,9 @@
 				B860F2461D64A725009C45A0 /* VerifyViewController.swift in Sources */,
 				B83B8B651D68C23800E2B324 /* ContactsCell.swift in Sources */,
 				B82976BF1D5EE53A009E9035 /* LoginViewController.swift in Sources */,
+				B81414CA1D6A1D8700296330 /* DestinationMapViewController.swift in Sources */,
 				873C864D1D572C6A00747B0B /* AppDelegate.swift in Sources */,
+				B81414CC1D6A20D800296330 /* LocationSearchTable.swift in Sources */,
 				B8A520A41D681BED00CB292A /* DateTimeCell.swift in Sources */,
 				B8ADCD051D68BBA600A87DF8 /* FriendCell.swift in Sources */,
 			);
