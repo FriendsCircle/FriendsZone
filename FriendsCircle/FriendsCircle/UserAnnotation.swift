@@ -10,7 +10,7 @@ import Foundation
 import MapKit
 
 class UserAnnotation: NSObject, MKAnnotation {
-    var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(0, 0)
+    dynamic var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(0, 0)
     var photo: UIImage?
     var timeleft: String?
     var user: User!
@@ -47,7 +47,8 @@ class UserAnnotation: NSObject, MKAnnotation {
     
     init(user: User) {
         self.user = user
-        self.coordinate = (user.coordinate?.coordinate)!
+        self.coordinate.longitude = user.longtitude!
+        self.coordinate.latitude = user.latitude!
     }
     
     

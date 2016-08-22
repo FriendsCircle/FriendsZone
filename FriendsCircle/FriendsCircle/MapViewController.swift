@@ -18,11 +18,10 @@ class MapViewController: UIViewController {
     let regionRadius: CLLocationDistance = 1000
     var attendedUser = [User]()
     let currentTrackingSection = TrackingSection()
-    var currentUser: User?
+    var currentUser = User.currentUser
     var currentSection: TrackingSection?
     let loginClient = LoginClient()
     var locationManager : CLLocationManager!
-    let user = User.currentUser
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,21 +43,22 @@ class MapViewController: UIViewController {
         locationManager.distanceFilter = 100
         locationManager.requestWhenInUseAuthorization()
         
-        loginClient.getUserInfo({ (user) in
+        loginClient.getUserInfo({ (user: User) in
+            let allAnnotations = self.mapView.annotations
+            self.mapView.removeAnnotations(allAnnotations)
+            //self.createAnnotation(user)
+            self.currentUser = user
             print(user.sessionId)
-            }, phone: user!.phoneNumber!)
-        
 
-        
-//        loginClient.getUserInfo({ (user: [User]) in
-//
-//            print("alluser \(user)")
-//            for ur in user {
-//                self.createAnnotation(ur)
-//            }
-//            
-//        }, phone: user!.phoneNumber!)
-        
+            
+            self.loginClient.getUserInSession({ (u : User) in
+                print(u)
+                if self.currentUser?.phoneNumber != u.phoneNumber {
+                    self.createAnnotation(u)
+                }
+                
+            }, sessionId: (self.currentUser?.sessionId)!)
+        }, phone: currentUser?.phoneNumber)
 
         loginClient.getListUser { (dictionary: NSDictionary) in
             print(dictionary)
