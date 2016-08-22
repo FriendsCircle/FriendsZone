@@ -58,7 +58,7 @@ class MapViewController: UIViewController {
                 }
                 
             }, sessionId: (self.currentUser?.sessionId)!)
-        }, phone: currentUser?.phoneNumber)
+        }, phone: (currentUser?.phoneNumber)!)
 
         loginClient.getListUser { (dictionary: NSDictionary) in
             print(dictionary)
@@ -129,7 +129,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             let region = MKCoordinateRegionMake(location.coordinate, span)
             mapView.setRegion(region, animated: false)
             
-            let userRef = loginClient.getRefFirebaseByPhoneNumber((user?.phoneNumber)!)
+            let userRef = loginClient.getRefFirebaseByPhoneNumber((currentUser!.phoneNumber)!)
             let longtitude = ["longtitude": location.coordinate.longitude]
             let latitude = ["latitude": location.coordinate.latitude]
             userRef.updateChildValues(latitude)
