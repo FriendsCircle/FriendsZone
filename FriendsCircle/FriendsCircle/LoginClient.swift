@@ -22,7 +22,8 @@ class LoginClient {
         
     }
     func getVerifyPhoneNumber(success: () -> (), failure: (String) -> (), phone: String, name: String) {
-        
+        // add link to server heroku for get verify number 
+        // https://whispering-stream-37719.herokuapp.com/test
         Alamofire.request(.GET, "http://localhost:3000/test", parameters: ["phone": phone]) .responseJSON { response in
             if ((response.response) != nil) {
                 if let res: NSHTTPURLResponse = response.response! {
