@@ -31,7 +31,6 @@ class MapViewController: UIViewController {
         
         mapView.delegate = self
         
-        
 //        let workSaiGon = MKPointAnnotation()
 //        workSaiGon.coordinate = CLLocationCoordinate2DMake(10.7803616,106.6860085)
 //        addAnnotationAtCoordinate(workSaiGon.coordinate, name: "Work Saigon")
@@ -45,17 +44,15 @@ class MapViewController: UIViewController {
         locationManager.distanceFilter = 100
         locationManager.requestWhenInUseAuthorization()
         
-        
         loginClient.getUserInfo({ (user: [User]) in
             
-            let allAnnotations = self.mapView.annotations
-            self.mapView.removeAnnotations(allAnnotations)
+//            let allAnnotations = self.mapView.annotations
+//            self.mapView.removeAnnotations(allAnnotations)
             
             print("alluser \(user)")
             for ur in user {
                 self.createAnnotation(ur)
             }
-            
             
         }, phone: user!.phoneNumber!)
         
@@ -82,7 +79,9 @@ class MapViewController: UIViewController {
             tempAnnotation.title = str
             print(user.name!)
             print(tempAnnotation.coordinate)
-            self.addAnnotationAtCoordinate(tempAnnotation.coordinate, name: user.name!)
+            
+//            self.addAnnotationAtCoordinate(tempAnnotation.coordinate, name: user.name!)
+            
             
         }
     }
@@ -100,6 +99,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             annotationView!.leftCalloutAccessoryView = UIImageView(frame: CGRect(x:0, y:0, width: 50, height:50))
             
         }
+        
         //let coordinateString = "\(annotation.coordinate.latitude), \(annotation.coordinate.longitude)"
         //let imageView = annotationView?.leftCalloutAccessoryView as! UIImageView
         //imageView.image = annotation!.thumnail
