@@ -53,21 +53,6 @@ class MapViewController: UIViewController {
 //            self.createAnnotation(user)
 //        }, phone: user!.phoneNumber!)
 
-        
-        
-        loginClient.getUserInfo({ (user: [User]) in
-            
-            let allAnnotations = self.mapView.annotations
-            self.mapView.removeAnnotations(allAnnotations)
-            
-            print("alluser \(user)")
-            for ur in user {
-                self.createAnnotation(ur)
-            }
-            
-            
-        }, phone: user!.phoneNumber!)
-
     }
 
     
