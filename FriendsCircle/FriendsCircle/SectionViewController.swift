@@ -18,6 +18,7 @@ class SectionViewController: UIViewController {
     var destinationLocation: CLLocation?
     var destinationName: String?
     var users = [User]()
+    let currentUser = User.currentUser
     
     @IBOutlet var tableView: UITableView!
     
@@ -33,6 +34,14 @@ class SectionViewController: UIViewController {
         
     }
     
+    func StandardizePhoneNumber(phoneNum : String) -> String {
+        let newPhoneNumString: String
+        newPhoneNumString = phoneNum.stringByReplacingOccurrencesOfString("\\s", withString: "", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+        
+        return newPhoneNumString
+    }
+
+    
 
     @IBAction func onBackPressed(sender: UIBarButtonItem) {
 //        dismissViewControllerAnimated(true, completion: nil)
@@ -41,6 +50,7 @@ class SectionViewController: UIViewController {
     }
     
     @IBAction func onSubmitPressed(sender: UIBarButtonItem) {
+        trackingSection.attendUser.append(currentUser!)
         trackingSection.submitSection()
         navigationController?.popViewControllerAnimated(true)
 
@@ -110,7 +120,8 @@ extension SectionViewController: UITableViewDelegate, UITableViewDataSource {
                 for num in selectedContacts[indexPath.row - 1].phoneNumbers {
                     let numVal = num.value as! CNPhoneNumber
                     if num.label == CNLabelPhoneNumberMobile {
-                        friendCell.phoneNumLabel.text = ("\(numVal.stringValue)")
+                        let newPhoneNumberString = StandardizePhoneNumber(numVal.stringValue)
+                        friendCell.phoneNumLabel.text = ("\(newPhoneNumberString)")
                         friendCell.userInteractionEnabled = false
                         
                     }
@@ -129,8 +140,8 @@ extension SectionViewController: ContactsListViewControllerDelegate {
             for num in contact.phoneNumbers {
                 let numVal = num.value as! CNPhoneNumber
                 if num.label == CNLabelPhoneNumberMobile {
-                    phoneNum = "\(numVal.stringValue)"
-            let user = User(phoneNumber: phoneNum!)
+                    let phoneNum = StandardizePhoneNumber(numVal.stringValue)
+            let user = User(phoneNumber: phoneNum)
                 user.firstName = contact.givenName
                     trackingSection.attendUser.append(user)}
         }
