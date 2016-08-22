@@ -39,20 +39,25 @@ class MapViewController: UIViewController {
 //        workSaiGon2.coordinate = CLLocationCoordinate2DMake(10.8016132,106.6639988)
 //        addAnnotationAtCoordinate(workSaiGon2.coordinate, name: "Work Saigon2")
         
+        
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.distanceFilter = 100
         locationManager.requestWhenInUseAuthorization()
 
-        loginClient.getListUser { (dictionary: NSDictionary) in
-            print(dictionary)
-        }
-//        
-//        loginClient.getUserInfo({ (user: User) in
-//            self.createAnnotation(user)
-//        }, phone: user!.phoneNumber!)
-
+//
+        loginClient.getUserInfo({ (user: User) in
+            let allAnnotations = self.mapView.annotations
+            self.mapView.removeAnnotations(allAnnotations)
+            self.createAnnotation(user)
+            self.currentUser = user
+           
+//            self.loginClient.getUserInSession({ (u : User) in
+//                print(u)
+//                self.createAnnotation(u)
+//                }, sessionId: (self.currentUser?.sessionId)!)
+        }, phone: user!.phoneNumber!)
     }
 
     
@@ -68,19 +73,21 @@ class MapViewController: UIViewController {
     }
     
     func createAnnotation(user: User) {
-        let tempAnnotation: MKPointAnnotation!
-        if user.longtitude != nil && user.latitude != nil {
-            tempAnnotation = MKPointAnnotation()
-            tempAnnotation.coordinate = CLLocationCoordinate2DMake(user.latitude!,user.longtitude!)
-            let str = String(tempAnnotation.coordinate.longitude) +  "-" + String(tempAnnotation.coordinate.latitude)
-
-            self.addAnnotationAtCoordinate(tempAnnotation.coordinate, name: user.name! + str)
-            tempAnnotation.title = str
-            print(user.name!)
-            print(tempAnnotation.coordinate)
-            self.addAnnotationAtCoordinate(tempAnnotation.coordinate, name: user.name!)
             
-        }
+        
+//        if user.longtitude != nil && user.latitude != nil {
+//            tempAnnotation = MKPointAnnotation()
+//            tempAnnotation.coordinate = CLLocationCoordinate2DMake(user.latitude!,user.longtitude!)
+//            let str = String(tempAnnotation.coordinate.longitude) +  "-" + String(tempAnnotation.coordinate.latitude)
+//            self.addAnnotationAtCoordinate(tempAnnotation.coordinate, name: user.name! + str)
+//            tempAnnotation.title = str
+        
+
+            let userAnnotation = UserAnnotation(user: user)
+            userAnnotation.updateLocation(CLLocationCoordinate2DMake(user.latitude!,user.longtitude!))
+            self.addAnnotationAtCoordinate(UserAnnotation(user: user).coordinate, name: user.name!)
+//
+//        }
     }
 }
 
@@ -111,7 +118,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
-            let span = MKCoordinateSpanMake(0.1, 0.1)
+            let span = MKCoordinateSpanMake(0.5, 0.5)
             let region = MKCoordinateRegionMake(location.coordinate, span)
             mapView.setRegion(region, animated: false)
             

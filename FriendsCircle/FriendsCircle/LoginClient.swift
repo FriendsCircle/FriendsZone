@@ -76,7 +76,7 @@ class LoginClient {
     
     func getListUser(success: (NSDictionary) -> ()) {
         ref.child("users").observeSingleEventOfType(.Value, withBlock: { snapshot in
-            let data = snapshot.value as! NSDictionary
+            let data: NSDictionary = snapshot.value as! NSDictionary
             success(data)
         })
     }
@@ -129,19 +129,18 @@ class LoginClient {
     }
     
     
-    func getUserInSession(sessionId: String){
+    func getUserInSession(success:(User) -> (), sessionId: String){
         let sessionRef = getRefFirebaseSessionTracking(sessionId)
-        sessionRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
+        sessionRef.observeEventType(.Value, withBlock: { snapshot in
             if snapshot.value is NSNull {
                 print("null")
             } else {
                 let data = snapshot.value! as! NSDictionary
                 // callback
                 self.getUsersLongLatInSession(data, success: { (user: User) in
-                    print(user)
+                    success(user)
                 })
             }
-            
             }, withCancelBlock: { error in
                 print(error.description)
         })
@@ -171,7 +170,6 @@ class LoginClient {
     
     func getUserInfo(success: (User) ->  (),phone: String) {
         let userRef = getRefFirebaseByPhoneNumber(phone)
-       
         userRef.observeEventType(.Value, withBlock: { snapshot in
             if snapshot.value is NSNull {
                 print("null")
