@@ -44,15 +44,24 @@ class MapViewController: UIViewController {
         locationManager.distanceFilter = 100
         locationManager.requestWhenInUseAuthorization()
         
-//        loginClient.getUserInfo({ (user: [User]) in
-//
-//            print("alluser \(user)")
-//            for ur in user {
-//                self.createAnnotation(ur)
-//            }
-//            
-//        }, phone: user!.phoneNumber!)
+        loginClient.getUserInfo({ (user: User) in
+            let allAnnotations = self.mapView.annotations
+            self.mapView.removeAnnotations(allAnnotations)
+            //self.createAnnotation(user)
+            self.currentUser = user
+            
+            self.loginClient.getUserInSession({ (u : User) in
+                print(u)
+                if self.currentUser?.phoneNumber != u.phoneNumber {
+                    self.createAnnotation(u)
+                }
+                
+            }, sessionId: (self.currentUser?.sessionId)!)
+        }, phone: user!.phoneNumber!)
+
         
+
+
 
         loginClient.getListUser { (dictionary: NSDictionary) in
             print(dictionary)
