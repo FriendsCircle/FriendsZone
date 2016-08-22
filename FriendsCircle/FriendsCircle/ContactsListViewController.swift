@@ -139,8 +139,14 @@ class ContactsListViewController: UIViewController {
         
         return true
     }
+    func StandardizePhoneNumber(phoneNum : String) -> String {
+        let newPhoneNumString: String
+        newPhoneNumString = phoneNum.stringByReplacingOccurrencesOfString("\\s", withString: "", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+        
+        return newPhoneNumString
+    }
 
-
+    // MARK: interaction
     @IBAction func dismissView(sender: AnyObject) {
         print("Dismiss contacts list")
         navigationController?.popViewControllerAnimated(true)
@@ -176,7 +182,10 @@ extension ContactsListViewController: UITableViewDelegate, UITableViewDataSource
                 if num.label == CNLabelPhoneNumberMobile {
                     print("\(numVal.stringValue)")
                     flgHaveMobilePhone =  true
-                    cell.phoneNumLabel.text = ("\(numVal.stringValue)")
+                    let phoneNum = StandardizePhoneNumber(numVal.stringValue)
+                    
+                    //let trimmedString = numVal.stringValue.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+                    cell.phoneNumLabel.text = ("\(phoneNum)")
                     cell.userInteractionEnabled = true
                     cell.backgroundColor = UIColor.whiteColor()
                 }
@@ -192,7 +201,8 @@ extension ContactsListViewController: UITableViewDelegate, UITableViewDataSource
             for num in selectedContacts[indexPath.row].phoneNumbers {
                 let numVal = num.value as! CNPhoneNumber
                 if num.label == CNLabelPhoneNumberMobile {
-                    cell.phoneNumLabel.text = ("\(numVal.stringValue)")
+                    let phoneNum = StandardizePhoneNumber(numVal.stringValue)
+                    cell.phoneNumLabel.text = ("\(phoneNum)")
                     cell.userInteractionEnabled = true
                     cell.backgroundColor = UIColor.whiteColor()
                 }
