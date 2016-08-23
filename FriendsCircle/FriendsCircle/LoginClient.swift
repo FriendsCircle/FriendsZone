@@ -87,7 +87,7 @@ class LoginClient {
 //            for user in users {
 //                print("\(user.phoneNumber), \(user.name) ")
 //            }
-            print(data.allKeys)
+           // print(data.allKeys)
             success(users)
             
         })
@@ -107,7 +107,7 @@ class LoginClient {
             //            for user in users {
             //                print("\(user.phoneNumber), \(user.name) ")
             //            }
-            print(data.allKeys)
+            //print(data.allKeys)
             success(users)
             
         })
@@ -190,7 +190,6 @@ class LoginClient {
                 }
                 
                 trackingSession.attendUser = users
-                
                 success(trackingSession)
             }
             }, withCancelBlock: { error in

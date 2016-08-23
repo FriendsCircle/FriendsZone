@@ -13,7 +13,12 @@ import MapKit
 class MapViewController: UIViewController {
     
     //outlet
-    @IBOutlet var mapView: MKMapView!
+    @IBOutlet var mapView: MKMapView! {
+        didSet {
+            mapView.mapType = .Satellite
+            mapView.delegate = self
+        }
+    }
     
     let regionRadius: CLLocationDistance = 1000
     var attendedUser = [User]()
@@ -29,8 +34,6 @@ class MapViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        mapView.delegate = self
-        
 //        let workSaiGon = MKPointAnnotation()
 //        workSaiGon.coordinate = CLLocationCoordinate2DMake(10.7803616,106.6860085)
 //        addAnnotationAtCoordinate(workSaiGon.coordinate, name: "Work Saigon")
@@ -41,15 +44,15 @@ class MapViewController: UIViewController {
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter = 100
+        locationManager.distanceFilter = 200
         locationManager.requestWhenInUseAuthorization()
         
         // get informaiton of current user: session id
         self.loginClient.getUserInfo((self.currentUser?.phoneNumber)!, success: { (user: User) in
-            let allAnnotations = self.mapView.annotations
-            self.mapView.removeAnnotations(allAnnotations)
+//            let allAnnotations = self.mapView.annotations
+//            self.mapView.removeAnnotations(allAnnotations)
             self.currentUser = user
-            print(user.sessionId)
+           
             
             //get information of current session
             self.loginClient.getSessionByID((self.currentUser?.sessionId)!) { (tracking: TrackingSection) in
@@ -61,18 +64,19 @@ class MapViewController: UIViewController {
                 }
                 self.loginClient.getListUsersByNumbers(self.phoneNumber) { (users: [User]) in
                     self.attendedUser = users
-                    print(self.attendedUser.count)
+                   // print(self.attendedUser.count)
+                    if self.mapView?.annotations != nil { self.mapView.removeAnnotations(self.mapView.annotations as [MKAnnotation]) }
                     for us in users {
-                        self.createAnnotation(us)
+                        if us.phoneNumber != self.currentUser?.phoneNumber {
+                            self.createAnnotation(us)
+                            print(us)
+                        }
                     }
                     
                 }
-                for user in self.attendedUser {
-                    print("Attended User: \(user.name): \(user.phoneNumber)")
-                    self.createAnnotation(user)
-                }
-                
-
+//                for user in self.attendedUser {
+//                    print("Attended User: \(user.name): \(user.phoneNumber)")
+//                }
             }
         })
         
