@@ -15,7 +15,6 @@ class MapViewController: UIViewController {
     //outlet
     @IBOutlet var mapView: MKMapView! {
         didSet {
-            mapView.mapType = .Satellite
             mapView.delegate = self
         }
     }
@@ -32,15 +31,6 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        
-//        let workSaiGon = MKPointAnnotation()
-//        workSaiGon.coordinate = CLLocationCoordinate2DMake(10.7803616,106.6860085)
-//        addAnnotationAtCoordinate(workSaiGon.coordinate, name: "Work Saigon")
-//        let workSaiGon2 = MKPointAnnotation()
-//        workSaiGon2.coordinate = CLLocationCoordinate2DMake(10.8016132,106.6639988)
-//        addAnnotationAtCoordinate(workSaiGon2.coordinate, name: "Work Saigon2")
-        
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -49,8 +39,6 @@ class MapViewController: UIViewController {
         
         // get informaiton of current user: session id
         self.loginClient.getUserInfo((self.currentUser?.phoneNumber)!, success: { (user: User) in
-//            let allAnnotations = self.mapView.annotations
-//            self.mapView.removeAnnotations(allAnnotations)
             self.currentUser = user
            
             
@@ -64,8 +52,8 @@ class MapViewController: UIViewController {
                 }
                 self.loginClient.getListUsersByNumbers(self.phoneNumber) { (users: [User]) in
                     self.attendedUser = users
-                   // print(self.attendedUser.count)
                     if self.mapView?.annotations != nil { self.mapView.removeAnnotations(self.mapView.annotations as [MKAnnotation]) }
+                    
                     for us in users {
                         if us.phoneNumber != self.currentUser?.phoneNumber {
                             self.createAnnotation(us)
@@ -74,40 +62,9 @@ class MapViewController: UIViewController {
                     }
                     
                 }
-//                for user in self.attendedUser {
-//                    print("Attended User: \(user.name): \(user.phoneNumber)")
-//                }
             }
         })
         
-        
-        
-       
-        
-
-        
-        
-//        loginClient.getListUser { (users: [User]) in
-//            self.attendedUser = users
-//            for user in self.attendedUser {
-//                print("Attended User: \(user.name): \(user.phoneNumber)")
-//            }
-//        }
-        
-        //        loginClient.getUserInSession({ (u : User) in
-        //            print(u)
-        //            if self.currentUser?.phoneNumber != u.phoneNumber {
-        //                self.createAnnotation(u)
-        //            }
-        //
-        //            }, sessionId: (self.currentUser?.sessionId)!)
-        
-        //        loginClient.getListUser { (dictionary: NSDictionary) in
-        //
-        //            
-        //            print(dictionary)
-        //        }
-
     }
 
     
@@ -123,11 +80,7 @@ class MapViewController: UIViewController {
     }
     
     func createAnnotation(user: User) {
-        //let tempAnnotation: MKPointAnnotation!
         if user.longtitude != nil && user.latitude != nil {
-//            tempAnnotation = MKPointAnnotation()
-//            tempAnnotation.coordinate = CLLocationCoordinate2DMake(user.latitude!,user.longtitude!)
-            
             let coor = CLLocationCoordinate2D(latitude: user.latitude!,longitude: user.longtitude!)
             self.addAnnotationAtCoordinate(coor, name: user.name!)
             
@@ -168,7 +121,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         if let location = locations.first {
             let span = MKCoordinateSpanMake(0.1, 0.1)
             let region = MKCoordinateRegionMake(location.coordinate, span)
-            mapView.setRegion(region, animated: false)
+            mapView.setRegion(region, animated: true)
             
             let userRef = loginClient.getRefFirebaseByPhoneNumber((currentUser!.phoneNumber)!)
             let longtitude = ["longtitude": location.coordinate.longitude]

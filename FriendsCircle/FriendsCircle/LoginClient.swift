@@ -81,7 +81,7 @@ class LoginClient {
             for keyString in data.allKeys {
                 let userDictionary = data["\(keyString)"] as! NSDictionary
                 let user = User(phoneNumber : userDictionary["phoneNumber"] as! String)
-                user.name = userDictionary["name"] as! String
+                user.name = userDictionary["name"] as? String
                 users.append(user)
             }
 //            for user in users {
@@ -94,20 +94,15 @@ class LoginClient {
     }
     
     func getListUsersByNumbers(phoneNumbers: [String], success: ([User]) -> ()) {
-        ref.child("users").observeSingleEventOfType(.Value, withBlock: { snapshot in
+        ref.child("users").observeEventType(.Value, withBlock: { snapshot in
             let data: NSDictionary = snapshot.value as! NSDictionary
             var users = [User]()
             for number in phoneNumbers {
                 let userDictionary = data[number] as! NSDictionary
                 let user = User(dictionary: userDictionary)
-                //let user = User(phoneNumber : userDictionary["phoneNumber"] as! String)
-                user.name = userDictionary["name"] as! String
+                user.name = userDictionary["name"] as? String
                 users.append(user)
             }
-            //            for user in users {
-            //                print("\(user.phoneNumber), \(user.name) ")
-            //            }
-            //print(data.allKeys)
             success(users)
             
         })
