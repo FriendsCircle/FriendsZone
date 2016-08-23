@@ -24,6 +24,13 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let backgroundImage = UIImageView(frame: UIScreen.mainScreen().bounds)
+        backgroundImage.image = UIImage(named: "Background")
+        backgroundImage.alpha = 0.8
+        backgroundImage.contentMode = UIViewContentMode.ScaleAspectFill
+        
+        self.view.insertSubview(backgroundImage, atIndex: 0)
     }
 
     @IBAction func onLogin(sender: UIButton) {
