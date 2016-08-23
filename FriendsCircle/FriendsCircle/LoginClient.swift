@@ -99,7 +99,8 @@ class LoginClient {
             var users = [User]()
             for number in phoneNumbers {
                 let userDictionary = data[number] as! NSDictionary
-                let user = User(phoneNumber : userDictionary["phoneNumber"] as! String)
+                let user = User(dictionary: userDictionary)
+                //let user = User(phoneNumber : userDictionary["phoneNumber"] as! String)
                 user.name = userDictionary["name"] as! String
                 users.append(user)
             }

@@ -48,7 +48,6 @@ class MapViewController: UIViewController {
         self.loginClient.getUserInfo((self.currentUser?.phoneNumber)!, success: { (user: User) in
             let allAnnotations = self.mapView.annotations
             self.mapView.removeAnnotations(allAnnotations)
-            //self.createAnnotation(user)
             self.currentUser = user
             print(user.sessionId)
             
@@ -56,24 +55,28 @@ class MapViewController: UIViewController {
             self.loginClient.getSessionByID((self.currentUser?.sessionId)!) { (tracking: TrackingSection) in
                 
                 self.currentTrackingSection = tracking
-                
-                
-                
                 for user in self.currentTrackingSection.attendUser {
                     self.phoneNumber.append(user.phoneNumber!)
+                    
                 }
                 self.loginClient.getListUsersByNumbers(self.phoneNumber) { (users: [User]) in
                     self.attendedUser = users
+                    print(self.attendedUser.count)
+                    for us in users {
+                        self.createAnnotation(us)
+                    }
+                    
                 }
                 for user in self.attendedUser {
                     print("Attended User: \(user.name): \(user.phoneNumber)")
+                    self.createAnnotation(user)
                 }
                 
-//                for user in self.currentTrackingSection.attendUser {
-//                    self.createAnnotation(user)
-//                }
+
             }
         })
+        
+        
         
        
         
@@ -116,18 +119,13 @@ class MapViewController: UIViewController {
     }
     
     func createAnnotation(user: User) {
-        let tempAnnotation: MKPointAnnotation!
+        //let tempAnnotation: MKPointAnnotation!
         if user.longtitude != nil && user.latitude != nil {
-            tempAnnotation = MKPointAnnotation()
-            tempAnnotation.coordinate = CLLocationCoordinate2DMake(user.latitude!,user.longtitude!)
-            let str = String(tempAnnotation.coordinate.longitude) +  "-" + String(tempAnnotation.coordinate.latitude)
-
-            self.addAnnotationAtCoordinate(tempAnnotation.coordinate, name: user.name! + str)
-            tempAnnotation.title = str
-            print(user.name!)
-            print(tempAnnotation.coordinate)
+//            tempAnnotation = MKPointAnnotation()
+//            tempAnnotation.coordinate = CLLocationCoordinate2DMake(user.latitude!,user.longtitude!)
             
-//            self.addAnnotationAtCoordinate(tempAnnotation.coordinate, name: user.name!)
+            let coor = CLLocationCoordinate2D(latitude: user.latitude!,longitude: user.longtitude!)
+            self.addAnnotationAtCoordinate(coor, name: user.name!)
             
             
         }
