@@ -111,6 +111,8 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             annotationView!.canShowCallout = true
             annotationView!.leftCalloutAccessoryView = UIImageView(frame: CGRect(x:0, y:0, width: 50, height:50))
             
+        } else {
+            annotationView?.annotation = annotation
         }
         
         //let coordinateString = "\(annotation.coordinate.latitude), \(annotation.coordinate.longitude)"
@@ -135,6 +137,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             let userRef = loginClient.getRefFirebaseByPhoneNumber((user?.phoneNumber)!)
             let longtitude = ["longtitude": location.coordinate.longitude]
             let latitude = ["latitude": location.coordinate.latitude]
+            
             userRef.updateChildValues(latitude)
             userRef.updateChildValues(longtitude)
         }
