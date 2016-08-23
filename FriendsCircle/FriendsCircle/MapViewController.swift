@@ -44,7 +44,7 @@ class MapViewController: UIViewController {
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter = 200
+        locationManager.distanceFilter = 50
         locationManager.requestWhenInUseAuthorization()
         
         // get informaiton of current user: session id
