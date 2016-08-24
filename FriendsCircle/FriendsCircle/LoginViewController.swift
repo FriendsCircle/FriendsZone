@@ -32,6 +32,11 @@ class LoginViewController: UIViewController {
         
         self.view.insertSubview(backgroundImage, atIndex: 0)
     }
+    
+    @IBAction func onTap(sender: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
+    
 
     @IBAction func onLogin(sender: UIButton) {
         let whitespace = NSCharacterSet.whitespaceCharacterSet()
