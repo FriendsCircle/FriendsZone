@@ -256,6 +256,9 @@ class LoginClient {
 
     func logout() {
         User.currentUser = nil
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(nil, forKey: "currentUserData")
+        defaults.synchronize()
         NSNotificationCenter.defaultCenter().postNotificationName(User.logoutString, object: nil)
     }
     

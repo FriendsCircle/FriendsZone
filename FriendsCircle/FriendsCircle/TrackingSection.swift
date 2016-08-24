@@ -78,7 +78,7 @@ class TrackingSection: NSObject {
             
             if error == nil {
                 let time: String?
-                //time = response
+//                time = response
                 // Get whichever currentRoute you'd like, ex. 0
                 route = response!.routes[0] as MKRoute
                 print("time: \(route?.expectedTravelTime)")

@@ -36,10 +36,26 @@ class LoginViewController: UIViewController {
     @IBAction func onLogin(sender: UIButton) {
         let whitespace = NSCharacterSet.whitespaceCharacterSet()
         if(phoneNumTxtField.text!.stringByTrimmingCharactersInSet(whitespace) == ""){
-            infoLbl.text = "Please enter your \n phone number"
+            //infoLbl.text = "Please enter your \n phone number"
+            let border = CALayer()
+            let width = CGFloat(2.0)
+            border.borderColor = UIColor.redColor().CGColor
+            border.frame = CGRect(x: 0, y: phoneNumTxtField.frame.size.height - width, width:  phoneNumTxtField.frame.size.width, height: phoneNumTxtField.frame.size.height)
+            
+            border.borderWidth = width
+            phoneNumTxtField.layer.addSublayer(border)
+            phoneNumTxtField.layer.masksToBounds = true
             return
         } else if (nameLabel.text!.stringByTrimmingCharactersInSet(whitespace) == "") {
-            infoLbl.text = "Please enter your name number"
+            //infoLbl.text = "Please enter your name"
+            let border = CALayer()
+            let width = CGFloat(2.0)
+            border.borderColor = UIColor.redColor().CGColor
+            border.frame = CGRect(x: 0, y: nameLabel.frame.size.height - width, width:  nameLabel.frame.size.width, height: nameLabel.frame.size.height)
+            
+            border.borderWidth = width
+            nameLabel.layer.addSublayer(border)
+            nameLabel.layer.masksToBounds = true
             return
         } else {
             let rawPhoneNum = "+84\(phoneNumTxtField.text!)"
