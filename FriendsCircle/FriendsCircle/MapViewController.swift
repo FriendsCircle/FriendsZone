@@ -117,10 +117,9 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                     for us in users {
                         if us.phoneNumber != self.currentUser?.phoneNumber {
                             if us.longtitude != nil && us.latitude != nil {
-                                //                                    let coor = CLLocationCoordinate2D(latitude: user.latitude!,longitude: user.longtitude!)
-                                //                                    let time =  self.currentTrackingSection.timingCalculation(coor, destination: CLLocationCoordinate2D(latitude: 38.33233141, longitude: -122.0312186 ))
-                                //
-                                //                                    print("\(us.name) \(time)")
+//                                let coor = CLLocationCoordinate2D(latitude: user.latitude!,longitude: user.longtitude!)
+//                                let time =  self.currentTrackingSection.timingCalculation(coor, destination: CLLocationCoordinate2D(latitude: 38.33233141, longitude: -122.0312186 ))
+//                                print("\(us.name) \(time)")
                                 self.createAnnotation(us)
                             }
                         }

@@ -25,12 +25,12 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let backgroundImage = UIImageView(frame: UIScreen.mainScreen().bounds)
-        backgroundImage.image = UIImage(named: "Background")
-        backgroundImage.alpha = 0.8
-        backgroundImage.contentMode = UIViewContentMode.ScaleAspectFill
-        
-        self.view.insertSubview(backgroundImage, atIndex: 0)
+//        let backgroundImage = UIImageView(frame: UIScreen.mainScreen().bounds)
+//        backgroundImage.image = UIImage(named: "Background")
+//        backgroundImage.alpha = 0.8
+//        backgroundImage.contentMode = UIViewContentMode.ScaleAspectFill
+//        
+//        self.view.insertSubview(backgroundImage, atIndex: 0)
     }
     
     @IBAction func onTap(sender: UITapGestureRecognizer) {
@@ -75,7 +75,7 @@ class LoginViewController: UIViewController {
             
             print(rawPhoneNum!.substringToIndex(rawPhoneNum!.startIndex.successor()))
             
-            let alertController = UIAlertController(title: "We are sending you an SMS containing a code to verify the phone number: \(rawPhoneNum)", message:
+            let alertController = UIAlertController(title: "We are sending you an SMS containing a code to verify the phone number: \(rawPhoneNum!)", message:
                 nil, preferredStyle: UIAlertControllerStyle.Alert)
             
             presentViewController(alertController, animated: true, completion: nil)
