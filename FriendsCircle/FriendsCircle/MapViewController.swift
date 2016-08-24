@@ -30,41 +30,13 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        currentSection = TrackingSection()
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter = 50
+        locationManager.distanceFilter = 200
         locationManager.requestWhenInUseAuthorization()
-        
-        // get informaiton of current user: session id
-        self.loginClient.getUserInfo((self.currentUser?.phoneNumber)!, success: { (user: User) in
-            self.currentUser = user
-           
-            
-            //get information of current session
-            self.loginClient.getSessionByID((self.currentUser?.sessionId)!) { (tracking: TrackingSection) in
-                
-                self.currentTrackingSection = tracking
-                for user in self.currentTrackingSection.attendUser {
-                    self.phoneNumber.append(user.phoneNumber!)
-                    
-                }
-                self.loginClient.getListUsersByNumbers(self.phoneNumber) { (users: [User]) in
-                    self.attendedUser = users
-                    if self.mapView?.annotations != nil { self.mapView.removeAnnotations(self.mapView.annotations as [MKAnnotation]) }
-                    
-                    for us in users {
-                        if us.phoneNumber != self.currentUser?.phoneNumber {
-                            self.createAnnotation(us)
-                            print(us)
-                        }
-                    }
-                    
-                }
-            }
-        })
-        
+        getUserInforAndLoadAnnotations()
     }
 
     
@@ -103,11 +75,6 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         } else {
             annotationView?.annotation = annotation
         }
-        
-        //let coordinateString = "\(annotation.coordinate.latitude), \(annotation.coordinate.longitude)"
-        //let imageView = annotationView?.leftCalloutAccessoryView as! UIImageView
-        //imageView.image = annotation!.thumnail
-        
         return annotationView
     }
     
@@ -132,6 +99,40 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         }
     }
     
+    func getUserInforAndLoadAnnotations() {
+        // get informaiton of current user: session id
+        self.loginClient.getUserInfo((self.currentUser?.phoneNumber)!, success: { (user: User) in
+            self.currentUser = user
+            //get information of current session
+            self.loginClient.getSessionByID((self.currentUser?.sessionId)!) { (tracking: TrackingSection) in
+                
+                self.currentTrackingSection = tracking
+                //self.currentTrackingSection.createLocalNotification()
+                for user in self.currentTrackingSection.attendUser {
+                    self.phoneNumber.append(user.phoneNumber!)
+                }
+                self.loginClient.getListUsersByNumbers(self.phoneNumber) { (users: [User]) in
+                    self.attendedUser = users
+                    if self.mapView?.annotations != nil { self.mapView.removeAnnotations(self.mapView.annotations as [MKAnnotation]) }
+                    for us in users {
+                        if us.phoneNumber != self.currentUser?.phoneNumber {
+                            if us.longtitude != nil && us.latitude != nil {
+                                //                                    let coor = CLLocationCoordinate2D(latitude: user.latitude!,longitude: user.longtitude!)
+                                //                                    let time =  self.currentTrackingSection.timingCalculation(coor, destination: CLLocationCoordinate2D(latitude: 38.33233141, longitude: -122.0312186 ))
+                                //
+                                //                                    print("\(us.name) \(time)")
+                                self.createAnnotation(us)
+                            }
+                        }
+                    }
+                }
+            }
+            }, failure: { (error:String) in
+                print("load current position")
+                
+        })
+
+    }
     
 }
 

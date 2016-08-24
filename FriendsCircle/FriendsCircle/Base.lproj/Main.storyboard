@@ -207,7 +207,7 @@
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X1K-5c-MHr">
                                                     <rect key="frame" x="24" y="15" width="288" height="30"/>
-                                                    <state key="normal" title="Button"/>
+                                                    <state key="normal" title="Add Friends"/>
                                                     <connections>
                                                         <segue destination="AAn-Bg-jAm" kind="show" identifier="Section2ContactsList" id="HKm-wN-5nF"/>
                                                     </connections>
