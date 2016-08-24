@@ -21,7 +21,7 @@ class LoginViewController: UIViewController {
     
     var users: [User]?
     var verifyNum: String = ""
-
+    var rawPhoneNum: String?
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -63,13 +63,23 @@ class LoginViewController: UIViewController {
             nameLabel.layer.masksToBounds = true
             return
         } else {
-            let rawPhoneNum = "+84\(phoneNumTxtField.text!)"
+            
+            let phoneNumString = "\(phoneNumTxtField.text!)"
+            if phoneNumString.containsString("+84") {
+                rawPhoneNum = phoneNumString
+            } else if phoneNumString.substringToIndex(phoneNumString.startIndex.successor()) == "0" {
+                rawPhoneNum = "+84\(phoneNumString.substringFromIndex(phoneNumString.startIndex.successor()))"
+            } else { rawPhoneNum = "+84\(phoneNumString)" }
             print(rawPhoneNum)
+            print("Test phone number string")
+            
+            print(rawPhoneNum!.substringToIndex(rawPhoneNum!.startIndex.successor()))
+            
             let alertController = UIAlertController(title: "We are sending you an SMS containing a code to verify the phone number: \(rawPhoneNum)", message:
                 nil, preferredStyle: UIAlertControllerStyle.Alert)
             
             presentViewController(alertController, animated: true, completion: nil)
-            getVerifyPhoneNumber(rawPhoneNum)
+            getVerifyPhoneNumber(rawPhoneNum!)
             alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default)
             { action -> Void in
                 self.performSegueWithIdentifier("verifySegue", sender: self)
@@ -91,6 +101,7 @@ class LoginViewController: UIViewController {
     // MARK: - Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let verifyVC = segue.destinationViewController as! VerifyViewController
-        verifyVC.phoneNum = "+84\(phoneNumTxtField.text!)"
+        verifyVC.phoneNum = rawPhoneNum!
+        
     }
 }

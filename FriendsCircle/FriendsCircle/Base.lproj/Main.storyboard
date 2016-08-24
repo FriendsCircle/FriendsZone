@@ -18,12 +18,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+84" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="25d-9E-Bl4">
-                                <rect key="frame" x="24" y="252" width="32" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="4sN-xl-BR4">
                                 <rect key="frame" x="60" y="248" width="200" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -60,7 +54,6 @@
                         <color key="tintColor" red="0.028450822654527141" green="0.3026838462118655" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="4sN-xl-BR4" firstAttribute="leading" secondItem="25d-9E-Bl4" secondAttribute="trailing" constant="4" id="4RJ-mB-Eyx"/>
                             <constraint firstItem="4sN-xl-BR4" firstAttribute="width" secondItem="3Wg-JB-urr" secondAttribute="width" id="EUv-B0-4Dk"/>
                             <constraint firstItem="wmA-9d-bla" firstAttribute="top" secondItem="2Y6-ag-db6" secondAttribute="bottom" constant="50" id="FxJ-OG-l4O"/>
                             <constraint firstItem="wmA-9d-bla" firstAttribute="width" secondItem="3Wg-JB-urr" secondAttribute="width" id="Fy9-I5-QJw"/>
@@ -71,7 +64,6 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="3Wg-JB-urr" secondAttribute="bottom" constant="250" id="ZCj-QU-hzh"/>
                             <constraint firstItem="4sN-xl-BR4" firstAttribute="height" secondItem="3Wg-JB-urr" secondAttribute="height" id="g1d-5X-mzc"/>
                             <constraint firstItem="4sN-xl-BR4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="iRJ-l7-ich"/>
-                            <constraint firstItem="25d-9E-Bl4" firstAttribute="centerY" secondItem="4sN-xl-BR4" secondAttribute="centerY" id="kYV-RN-KPR"/>
                             <constraint firstItem="3Wg-JB-urr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="qiI-To-xpU"/>
                             <constraint firstItem="wmA-9d-bla" firstAttribute="height" secondItem="3Wg-JB-urr" secondAttribute="height" id="tD7-ec-kDG"/>
                             <constraint firstItem="3Wg-JB-urr" firstAttribute="top" secondItem="4sN-xl-BR4" secondAttribute="bottom" constant="10" id="yz1-lf-BDR"/>
