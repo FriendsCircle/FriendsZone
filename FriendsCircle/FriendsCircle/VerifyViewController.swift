@@ -16,6 +16,13 @@ class VerifyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         phoneLbl.text = phoneNum
+        
+        let backgroundImage = UIImageView(frame: UIScreen.mainScreen().bounds)
+        backgroundImage.image = UIImage(named: "VerifyBackground")
+        backgroundImage.alpha = 0.8
+        backgroundImage.contentMode = UIViewContentMode.ScaleAspectFill
+        self.view.insertSubview(backgroundImage, atIndex: 0)
+
     }
 
     override func didReceiveMemoryWarning() {
