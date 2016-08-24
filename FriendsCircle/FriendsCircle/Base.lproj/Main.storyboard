@@ -23,7 +23,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="go"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your Name" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="wmA-9d-bla">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your Name" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="wmA-9d-bla">
                                 <rect key="frame" x="60" y="208" width="200" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
@@ -171,8 +171,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="108.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GR2-t9-sRh">
-                                                    <rect key="frame" x="10" y="10" width="300" height="88.5"/>
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GR2-t9-sRh">
+                                                    <rect key="frame" x="10" y="10" width="300" height="46.5"/>
                                                     <state key="normal" title="Add Destination"/>
                                                     <connections>
                                                         <segue destination="p1d-s1-e3M" kind="show" identifier="Section2DestinationMap" id="YKP-TV-0r4"/>
@@ -526,9 +526,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5bV-Lj-bjo">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5bV-Lj-bjo">
                                 <rect key="frame" x="166" y="228" width="90" height="30"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="90" id="B6x-cD-0Dj"/>
+                                    <constraint firstAttribute="height" constant="30" id="x4y-dV-oth"/>
+                                </constraints>
                                 <state key="normal" title="Verify">
                                     <color key="titleColor" red="0.99991601705551147" green="1" blue="0.99987190961837769" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -536,28 +540,36 @@
                                     <action selector="VerifyTapped:" destination="Dua-Cz-gj4" eventType="touchUpInside" id="VTk-Gx-fIE"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rcj-Jh-k5v">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rcj-Jh-k5v">
                                 <rect key="frame" x="64" y="166" width="192" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="192" id="3tv-hV-jgO"/>
+                                    <constraint firstAttribute="height" constant="30" id="IwH-fX-fv1"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mJ1-sk-n1D">
-                                <rect key="frame" x="38" y="20" width="244" height="60"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mJ1-sk-n1D">
+                                <rect key="frame" x="45" y="30" width="230" height="48"/>
                                 <string key="text">We've sent you a code to
 verify your phone number</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sent to " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FNB-IO-9Zb">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Sent to " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FNB-IO-9Zb">
                                 <rect key="frame" x="38" y="88" width="244" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ilk-Nm-hiA">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ilk-Nm-hiA">
                                 <rect key="frame" x="64" y="228" width="90" height="30"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="0fK-Fy-4Br"/>
+                                    <constraint firstAttribute="width" constant="90" id="nBW-sM-5ow"/>
+                                </constraints>
                                 <state key="normal" title="back">
                                     <color key="titleColor" red="0.99991601705551147" green="1" blue="0.99987190961837769" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -567,6 +579,30 @@ verify your phone number</string>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="mJ1-sk-n1D" firstAttribute="top" secondItem="cbD-Om-P5K" secondAttribute="bottom" constant="10" id="0DW-Eu-dfE"/>
+                            <constraint firstItem="ilk-Nm-hiA" firstAttribute="top" secondItem="Rcj-Jh-k5v" secondAttribute="bottom" constant="32" id="1eY-al-STZ"/>
+                            <constraint firstItem="FNB-IO-9Zb" firstAttribute="centerX" secondItem="M8c-pl-s8u" secondAttribute="centerX" id="46j-Rd-sEw"/>
+                            <constraint firstItem="Rcj-Jh-k5v" firstAttribute="leading" secondItem="M8c-pl-s8u" secondAttribute="leading" constant="64" id="KaK-4d-CgY"/>
+                            <constraint firstItem="mJ1-sk-n1D" firstAttribute="centerX" secondItem="M8c-pl-s8u" secondAttribute="centerX" id="Mbe-0x-Jb1"/>
+                            <constraint firstItem="ilk-Nm-hiA" firstAttribute="leading" secondItem="Rcj-Jh-k5v" secondAttribute="leading" id="SPb-SB-elk"/>
+                            <constraint firstItem="Rcj-Jh-k5v" firstAttribute="top" secondItem="FNB-IO-9Zb" secondAttribute="bottom" constant="57" id="Xf2-iO-as6"/>
+                            <constraint firstAttribute="trailing" secondItem="Rcj-Jh-k5v" secondAttribute="trailing" constant="64" id="aZX-V3-Y94"/>
+                            <constraint firstItem="FNB-IO-9Zb" firstAttribute="top" secondItem="mJ1-sk-n1D" secondAttribute="bottom" constant="10" id="bCz-db-3dO"/>
+                            <constraint firstItem="5bV-Lj-bjo" firstAttribute="top" secondItem="ilk-Nm-hiA" secondAttribute="top" id="hDl-3y-Vgq"/>
+                            <constraint firstItem="5bV-Lj-bjo" firstAttribute="trailing" secondItem="Rcj-Jh-k5v" secondAttribute="trailing" id="jrP-tB-dHf"/>
+                            <constraint firstItem="ilk-Nm-hiA" firstAttribute="top" secondItem="Rcj-Jh-k5v" secondAttribute="bottom" constant="32" id="lGn-OK-dtK"/>
+                            <constraint firstItem="Rcj-Jh-k5v" firstAttribute="top" secondItem="FNB-IO-9Zb" secondAttribute="bottom" constant="57" id="yeF-IM-nR6"/>
+                            <constraint firstItem="Rcj-Jh-k5v" firstAttribute="centerX" secondItem="M8c-pl-s8u" secondAttribute="centerX" id="zC3-Fx-twR"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="KaK-4d-CgY"/>
+                                <exclude reference="aZX-V3-Y94"/>
+                                <exclude reference="yeF-IM-nR6"/>
+                                <exclude reference="lGn-OK-dtK"/>
+                            </mask>
+                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>

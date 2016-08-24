@@ -70,12 +70,10 @@ class LoginViewController: UIViewController {
             } else if phoneNumString.substringToIndex(phoneNumString.startIndex.successor()) == "0" {
                 rawPhoneNum = "+84\(phoneNumString.substringFromIndex(phoneNumString.startIndex.successor()))"
             } else { rawPhoneNum = "+84\(phoneNumString)" }
-            print(rawPhoneNum)
-            print("Test phone number string")
             
-            print(rawPhoneNum!.substringToIndex(rawPhoneNum!.startIndex.successor()))
             
-            let alertController = UIAlertController(title: "We are sending you an SMS containing a code to verify the phone number: \(rawPhoneNum)", message:
+            
+            let alertController = UIAlertController(title: "We are sending you an SMS containing a code to verify the phone number: \(rawPhoneNum!)", message:
                 nil, preferredStyle: UIAlertControllerStyle.Alert)
             
             presentViewController(alertController, animated: true, completion: nil)
