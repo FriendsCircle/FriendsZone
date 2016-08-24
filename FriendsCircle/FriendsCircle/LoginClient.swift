@@ -234,7 +234,7 @@ class LoginClient {
     }
     
     
-    func getUserInfo(phone: String, success: (User) ->  ()) {
+    func getUserInfo(phone: String, success: (User) ->  (), failure: (String) ->()) {
         let userRef = getRefFirebaseByPhoneNumber(phone)
         userRef.observeEventType(.Value, withBlock: { snapshot in
             if snapshot.value is NSNull {
@@ -248,6 +248,7 @@ class LoginClient {
                     success(userTeamp)
                 } else {
                     print("error no session id")
+                    failure("NoSessionID")
                 }
             }
         })

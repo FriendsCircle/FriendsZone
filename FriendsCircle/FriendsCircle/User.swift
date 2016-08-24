@@ -48,7 +48,9 @@ class User: NSObject {
     func getInforFromFirebase(string: String) {
         loginClient.getUserInfo(phoneNumber!, success: { (user: User) in
             self.name = user.name
-            } )
+        }, failure: { (error: String) in
+        
+        })
     }
     
     class var currentUser: User? {

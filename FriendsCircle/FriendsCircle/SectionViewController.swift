@@ -31,7 +31,6 @@ class SectionViewController: UIViewController {
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
         
-        
     }
     
     func StandardizePhoneNumber(phoneNum : String) -> String {
@@ -64,7 +63,8 @@ class SectionViewController: UIViewController {
             destinationMapVC.delegate = self
         }
     }
-  
+    
+    
 }
 
 extension SectionViewController: UITableViewDelegate, UITableViewDataSource {
@@ -136,7 +136,6 @@ extension SectionViewController: ContactsListViewControllerDelegate {
     func contactsListViewController(contactsListViewController: ContactsListViewController, didSelectedUsersList contacts: [CNContact]) {
         print("delegate success")
         for contact in contacts {
-            var phoneNum: String?
             for num in contact.phoneNumbers {
                 let numVal = num.value as! CNPhoneNumber
                 if num.label == CNLabelPhoneNumberMobile {

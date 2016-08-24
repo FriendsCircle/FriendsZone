@@ -20,6 +20,9 @@ class TrackingSection: NSObject {
     
     let loginClient = LoginClient()
     
+    override init() {
+        super.init()
+    }
     func addUser(user: User)
     {
         attendUser.append(user)
@@ -115,6 +118,24 @@ class TrackingSection: NSObject {
         
         loginClient.createSessionTracking("\(sessionId)", sessionTracking: sessionTracking)
     }
+    
+    
+    
+    func createLocalNotification() {
+        let theDate  = NSDate()
+        let dateComp = NSDateComponents()
+        dateComp.second  = 15
+        let calendar = NSCalendar.currentCalendar()
+        let fireDate: NSDate = calendar.dateByAddingComponents(dateComp, toDate: theDate, options: NSCalendarOptions.init(rawValue: 0))!
+        
+        let notification = UILocalNotification()
+        notification.alertBody = "This notification from Friend Circle"
+        
+        notification.fireDate = fireDate
+        UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        
+    }
+
     
 
 }
