@@ -13,6 +13,7 @@ import MapKit
 class MapViewController: UIViewController {
     
     //outlet
+    @IBOutlet var NoSessionLabel: UILabel!
     @IBOutlet var mapView: MKMapView! {
         didSet {
             mapView.delegate = self
@@ -27,15 +28,20 @@ class MapViewController: UIViewController {
     let loginClient = LoginClient()
     var locationManager : CLLocationManager!
     var phoneNumber = [String]()
+    var currentMoment = NSDate()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        currentMoment = NSDate()
+        displayTime(currentMoment)
+        
         currentSection = TrackingSection()
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.distanceFilter = 200
         locationManager.requestWhenInUseAuthorization()
+        NoSessionLabel.alpha = 0
         getUserInforAndLoadAnnotations()
     }
 
@@ -58,6 +64,14 @@ class MapViewController: UIViewController {
             
             
         }
+    }
+    
+    func displayTime(date: NSDate) {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
+        dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
+        let dateString = dateFormatter.stringFromDate(date)
+        print("Testing date: \(dateString)")
     }
 }
 
@@ -105,28 +119,48 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             self.currentUser = user
             //get information of current session
             self.loginClient.getSessionByID((self.currentUser?.sessionId)!) { (tracking: TrackingSection) in
-                
+                self.currentMoment = NSDate()
                 self.currentTrackingSection = tracking
-                //self.currentTrackingSection.createLocalNotification()
-                for user in self.currentTrackingSection.attendUser {
-                    self.phoneNumber.append(user.phoneNumber!)
-                }
-                self.loginClient.getListUsersByNumbers(self.phoneNumber) { (users: [User]) in
-                    self.attendedUser = users
-                    if self.mapView?.annotations != nil { self.mapView.removeAnnotations(self.mapView.annotations as [MKAnnotation]) }
-                    for us in users {
-                        if us.phoneNumber != self.currentUser?.phoneNumber {
-                            if us.longtitude != nil && us.latitude != nil {
-//                                let coor = CLLocationCoordinate2D(latitude: user.latitude!,longitude: user.longtitude!)
-//                                let time =  self.currentTrackingSection.timingCalculation(coor, destination: CLLocationCoordinate2D(latitude: 38.33233141, longitude: -122.0312186 ))
-//                                print("\(us.name) \(time)")
-                                self.createAnnotation(us)
-                            }
-                        }
+                //if (self.currentMoment >= currentTrackingSection.begin) || (self.currentMoment <= currentTrackingSection.begin) {
+                let beginCompare = self.currentMoment.compare(self.currentTrackingSection.begin!)
+                let endCompare = self.currentMoment.compare(self.currentTrackingSection.end!)
+                if (beginCompare == NSComparisonResult.OrderedDescending) && (endCompare == NSComparisonResult.OrderedAscending){
+                    
+                    print("tracking happening")
+                    self.NoSessionLabel.alpha = 0
+                    print("Current Time:")
+                    self.displayTime(self.currentMoment)
+                    print("Begin and eng:")
+                    self.displayTime(self.currentTrackingSection.begin!)
+                    self.displayTime(self.currentTrackingSection.end!)
+                    print("tracking begin at: \(self.currentTrackingSection.begin) and end at: \(self.currentTrackingSection.end)")
+                    for user in self.currentTrackingSection.attendUser {
+                        self.phoneNumber.append(user.phoneNumber!)
                     }
+                    self.loginClient.getListUsersByNumbers(self.phoneNumber) { (users: [User]) in
+                        self.attendedUser = users
+                        if self.mapView?.annotations != nil { self.mapView.removeAnnotations(self.mapView.annotations as [MKAnnotation]) }
+                        for us in users {
+                            if us.phoneNumber != self.currentUser?.phoneNumber {
+                                if us.longtitude != nil && us.latitude != nil {
+    //                                let coor = CLLocationCoordinate2D(latitude: user.latitude!,longitude: user.longtitude!)
+    //                                let time =  self.currentTrackingSection.timingCalculation(coor, destination: CLLocationCoordinate2D(latitude: 38.33233141, longitude: -122.0312186 ))
+    //                                print("\(us.name) \(time)")
+                                    self.createAnnotation(us)
+                                }
+                            }
+                    }
+                }
+                } else if beginCompare == NSComparisonResult.OrderedAscending {
+                    self.NoSessionLabel.text = "Session will happen soon"
+                    self.NoSessionLabel.alpha = 1
+                } else if endCompare == NSComparisonResult.OrderedDescending {
+                    self.NoSessionLabel.text = "Session is expired"
+                    self.NoSessionLabel.alpha = 1
                 }
             }
             }, failure: { (error:String) in
+                self.NoSessionLabel.alpha = 1
                 print("load current position")
                 
         })
