@@ -124,7 +124,13 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                 //if (self.currentMoment >= currentTrackingSection.begin) || (self.currentMoment <= currentTrackingSection.begin) {
                 let beginCompare = self.currentMoment.compare(self.currentTrackingSection.begin!)
                 let endCompare = self.currentMoment.compare(self.currentTrackingSection.end!)
-                if (beginCompare == NSComparisonResult.OrderedDescending) && (endCompare == NSComparisonResult.OrderedAscending){
+                if (beginCompare == NSComparisonResult.OrderedAscending) {
+                    self.NoSessionLabel.text = "Session will happen soon"
+                    self.NoSessionLabel.alpha = 1
+                } else if endCompare == NSComparisonResult.OrderedDescending {
+                    self.NoSessionLabel.text = "Session is expired"
+                    self.NoSessionLabel.alpha = 1
+                } else {
                     
                     print("tracking happening")
                     self.NoSessionLabel.alpha = 0
@@ -151,13 +157,8 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                             }
                     }
                 }
-                } else if beginCompare == NSComparisonResult.OrderedAscending {
-                    self.NoSessionLabel.text = "Session will happen soon"
-                    self.NoSessionLabel.alpha = 1
-                } else if endCompare == NSComparisonResult.OrderedDescending {
-                    self.NoSessionLabel.text = "Session is expired"
-                    self.NoSessionLabel.alpha = 1
-                }
+                
+            }
             }
             }, failure: { (error:String) in
                 self.NoSessionLabel.alpha = 1
